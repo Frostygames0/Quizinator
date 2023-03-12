@@ -1,0 +1,40 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" Width="600" Height="270" CanResize="False"
+        x:Class="Quizinator.Views.CreateQuizWindow"
+        
+        Title="Create Quiz"
+        
+        TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+        ExtendClientAreaToDecorationsHint="True">
+    <Panel>
+        <ExperimentalAcrylicBorder IsHitTestVisible="False">
+            <ExperimentalAcrylicBorder.Material>
+                <ExperimentalAcrylicMaterial
+                    BackgroundSource="Digger"
+                    TintColor="Black"
+                    TintOpacity="1"
+                    MaterialOpacity="0.50" />
+            </ExperimentalAcrylicBorder.Material>
+        </ExperimentalAcrylicBorder>
+        
+        <Panel Margin="40 20 40 10">
+            <StackPanel Spacing="10">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           FontSize="40"
+                           FontWeight="Thin">
+                    Создать новую викторину
+                </TextBlock>
+                <TextBox Text="{Binding TestText}" Watermark="Введите название..."></TextBox>
+                <TextBox Watermark="Введите описание..."></TextBox>
+                <TextBox Watermark="Имя автора..."></TextBox>
+                <Button HorizontalAlignment="Right"
+                        Command="{Binding FinalizeCreation}">Завершить создание</Button>
+            </StackPanel>
+        </Panel>
+    </Panel>
+</Window>

@@ -1,0 +1,38 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Quizinator.Views.MenuView">
+    <StackPanel Spacing="10">
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   FontSize="80"
+                   FontWeight="Thin">
+            ВикторинатоР
+        </TextBlock>
+
+        <StackPanel Spacing="10">
+            <StackPanel.Styles>
+                <Style Selector="Button.coolButton">
+                    <Setter Property="FontSize" Value="28" />
+                    <Setter Property="FontWeight" Value="Thin" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="VerticalAlignment" Value="Top" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Foreground" Value="White" />
+                </Style>
+            </StackPanel.Styles>
+
+            <Button Classes="coolButton" Command="{Binding OpenQuizLibrary}">
+                Начать Викторину
+            </Button>
+            <Button Classes="coolButton"
+                    IsEnabled="False" 
+                    Command="{Binding CreateNewQuiz}">
+                Создать Викторину
+            </Button>
+        </StackPanel>
+    </StackPanel>
+
+</UserControl>
