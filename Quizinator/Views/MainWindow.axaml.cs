@@ -9,7 +9,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
     public MainWindow()
     {
-        this.WhenActivated(d => d(ViewModel!.ShowCreatingDialog.RegisterHandler(ShowCreationDialogAsync)));
+        this.WhenActivated(disposables => disposables(ViewModel!.ShowCreatingDialog.RegisterHandler(ShowCreationDialogAsync)));
         InitializeComponent();
     }
     

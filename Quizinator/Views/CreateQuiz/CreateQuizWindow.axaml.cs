@@ -9,7 +9,7 @@ public partial class CreateQuizWindow : ReactiveWindow<CreateQuizViewModel>
 {
     public CreateQuizWindow()
     {
-        this.WhenActivated(d => d(ViewModel!.FinalizeCreation.Subscribe(Close)));
+        this.WhenActivated(disposables => disposables(ViewModel!.FinalizeCreation.Subscribe(Close)));
         InitializeComponent();
     }
 }

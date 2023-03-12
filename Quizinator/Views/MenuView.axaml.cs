@@ -13,24 +13,7 @@ public partial class MenuView : ReactiveUserControl<MenuViewModel>
 {
     public MenuView()
     {
-        this.WhenActivated(d => {});
+        this.WhenActivated(disposables => {});
         InitializeComponent();
-    }
-    
-    private async Task ShowCreationDialogAsync(InteractionContext<CreateQuizViewModel, string?> interaction)
-    {
-        var dialog = new CreateQuizWindow
-        {
-            DataContext = interaction.Input
-        };
-
-        var supposedWindow = ViewModel!.HostScreen as Window;
-        if (supposedWindow is null)
-        {
-            if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime lifetime)
-                lifetime.Shutdown();
-        }
-        var result = await dialog.ShowDialog<string>(supposedWindow);
-        interaction.SetOutput(result);
     }
 }
