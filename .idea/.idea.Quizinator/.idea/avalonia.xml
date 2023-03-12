@@ -4,6 +4,7 @@
     <option name="projectPerEditor">
       <map>
         <entry key="Quizinator/Views/MainWindow.axaml" value="Quizinator/Quizinator.csproj" />
+        <entry key="Quizinator/Views/QuizLibraryView.axaml" value="Quizinator/Quizinator.csproj" />
       </map>
     </option>
   </component>
