@@ -2,13 +2,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:local="clr-namespace:Quizinator.Models"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="350"
              x:Class="Quizinator.Views.QuizLibraryView">
+    <UserControl.DataTemplates>
+        <DataTemplate DataType="{x:Type local:Quiz}">
+            <StackPanel HorizontalAlignment="Stretch">
+                <TextBlock Text="{Binding DisplayName}"
+                           FontSize="25" 
+                           FontWeight="Thin"/>
+                <TextBlock Text="{Binding Description}"
+                           FontWeight="Thin"/>
+                <TextBlock Text="{Binding QuestionCount}"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.DataTemplates>
+    
     <StackPanel Spacing="10">
-        <TextBlock HorizontalAlignment="Center"
-                   FontSize="30"
-                   FontWeight="Thin">Здесь нет ничего, пока что!</TextBlock>
-        <Button HorizontalAlignment="Center"
-                Command="{Binding ReturnToMenu}">Назад в меню</Button>
+        <TextBlock Classes="h2" HorizontalAlignment="Center">
+            Выберите викторину
+        </TextBlock>
+        <ListBox Items="{Binding FoundQuizzes}" 
+                 SelectedItem="{Binding ChosenQuiz}"
+                 Background="Gray"
+                 Width="500" Height="200"
+                 HorizontalAlignment="Stretch"
+                 ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListBox.Styles>
+                <Style Selector="ListBoxItem">
+                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                </Style>
+            </ListBox.Styles>
+        </ListBox>
+        <WrapPanel HorizontalAlignment="Center">
+            <Button IsEnabled="False">Начать викторину</Button>
+            <Button Command="{Binding ReturnToMenu}">Назад в меню</Button>
+        </WrapPanel>
     </StackPanel>
 </UserControl>

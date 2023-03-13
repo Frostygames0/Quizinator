@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reactive;
+using Quizinator.Models;
 using ReactiveUI;
 
 namespace Quizinator.ViewModels;
@@ -14,7 +15,7 @@ public class QuizLibraryViewModel : ViewModelBase, IRoutableViewModel
         set => this.RaiseAndSetIfChanged(ref _chosenQuiz, value);
     }
 
-    public ObservableCollection<QuizViewModel> FoundQuizzes { get; }
+    public ObservableCollection<Quiz> FoundQuizzes { get; }
     
     public ReactiveCommand<Unit, IRoutableViewModel> ReturnToMenu { get; }
     
@@ -26,7 +27,7 @@ public class QuizLibraryViewModel : ViewModelBase, IRoutableViewModel
         HostScreen = hostScreen;
         UrlPathSegment = "quiz_library";
 
-        FoundQuizzes = new ObservableCollection<QuizViewModel>();
+        FoundQuizzes = new ObservableCollection<Quiz>();
 
         ReturnToMenu = ReactiveCommand.CreateFromObservable(() => hostScreen.Router.NavigateAndReset.Execute(new MenuViewModel(hostScreen, openDialog)));
     }
