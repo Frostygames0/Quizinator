@@ -3,5 +3,6 @@
              x:Class="Quizinator.App">
     <Application.Styles>
         <FluentTheme Mode="Dark"/>
+        <StyleInclude Source="/TextStyles.axaml" />
     </Application.Styles>
 </Application>

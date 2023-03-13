@@ -1,0 +1,22 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <StackPanel Spacing="10">
+                <TextBlock Classes="h1">Sample Text (H1)</TextBlock>
+                <TextBlock Classes="h2">Sample Text (H2)</TextBlock>
+            </StackPanel>
+        </Border>
+    </Design.PreviewWith>
+    
+    <Style Selector="TextBlock.h1">
+        <Setter Property="FontSize" Value="80" />
+        <Setter Property="FontWeight" Value="Thin" />
+    </Style>
+    
+    <Style Selector="TextBlock.h2">
+        <Setter Property="FontSize" Value="40" />
+        <Setter Property="FontWeight" Value="Thin" />
+    </Style>
+    
+</Styles>

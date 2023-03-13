@@ -5,16 +5,15 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Quizinator.Views.MenuView">
     <StackPanel Spacing="10">
-        <TextBlock HorizontalAlignment="Center"
-                   VerticalAlignment="Top"
-                   FontSize="80"
-                   FontWeight="Thin">
+        <TextBlock Classes="h1"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top">
             ВикторинатоР
         </TextBlock>
 
         <StackPanel Spacing="10">
             <StackPanel.Styles>
-                <Style Selector="Button.coolButton">
+                <Style Selector="Button">
                     <Setter Property="FontSize" Value="28" />
                     <Setter Property="FontWeight" Value="Thin" />
                     <Setter Property="HorizontalAlignment" Value="Center" />
@@ -24,12 +23,11 @@
                 </Style>
             </StackPanel.Styles>
 
-            <Button Classes="coolButton" Command="{Binding OpenQuizLibrary}">
+            <Button Command="{Binding OpenQuizLibrary}">
                 Начать Викторину
             </Button>
-            <Button Classes="coolButton"
-                    IsEnabled="False" 
-                    Command="{Binding CreateNewQuiz}">
+            <Button Command="{Binding CreateNewQuiz}"
+                    IsEnabled="False">
                 Создать Викторину
             </Button>
         </StackPanel>
