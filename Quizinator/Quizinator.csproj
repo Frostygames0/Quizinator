@@ -9,6 +9,9 @@
         <AssemblyName>Quizinator</AssemblyName>
         <RootNamespace>Quizinator</RootNamespace>
         <ApplicationIcon>Assets\quizinator_logo.ico</ApplicationIcon>
+        <Authors>Frostygames0</Authors>
+        <Company>Frostygames0</Company>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
     </PropertyGroup>
 
     <ItemGroup>
