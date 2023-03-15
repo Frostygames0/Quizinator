@@ -28,9 +28,9 @@
                            VerticalAlignment="Top">
                     Создать новую викторину
                 </TextBlock>
-                <TextBox Text="{Binding TestText}" Watermark="Введите название..."></TextBox>
-                <TextBox Watermark="Введите описание..."></TextBox>
-                <TextBox Watermark="Имя автора..."></TextBox>
+                <TextBox Text="{Binding TestText}" Watermark="Введите название..." />
+                <TextBox Watermark="Введите описание..." />
+                <TextBox Watermark="Имя автора..." />
                 <Button HorizontalAlignment="Right"
                         Command="{Binding FinalizeCreation}">Завершить создание</Button>
             </StackPanel>

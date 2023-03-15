@@ -2,25 +2,16 @@
 
 namespace Quizinator.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase, IScreen, IActivatableViewModel
+public class MainWindowViewModel : ViewModelBase, IScreen
 {
-    public ViewModelActivator Activator { get; }
-    
-    public RoutingState Router { get; }
+    public RoutingState Router { get; } = new();
 
     public Interaction<CreateQuizViewModel, string?> ShowCreatingDialog { get; }
 
     public MainWindowViewModel()
     {
-        Activator = new ViewModelActivator();
-        
         ShowCreatingDialog = new Interaction<CreateQuizViewModel, string?>();
-
-        Router = new RoutingState();
-        Router.Navigate.Execute(new MenuViewModel(this, ShowCreatingDialog));
+        
+        Router.Navigate.Execute(new MenuViewModel(this));
     }
-    
-    
-    
-    
 }

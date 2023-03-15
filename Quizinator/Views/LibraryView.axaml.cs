@@ -4,9 +4,9 @@ using ReactiveUI;
 
 namespace Quizinator.Views;
 
-public partial class QuizLibraryView : ReactiveUserControl<QuizLibraryViewModel>
+public partial class LibraryView : ReactiveUserControl<LibraryViewModel>
 {
-    public QuizLibraryView()
+    public LibraryView()
     {
         this.WhenActivated(disposables => { });
         InitializeComponent();

@@ -1,3 +1,4 @@
+using System.IO;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -10,6 +11,8 @@ public partial class App : Application
 {
     public override void Initialize()
     {
+        Directory.CreateDirectory(Paths.Quizzes); // TODO Move to a bootstrapper of sort
+        
         AvaloniaXamlLoader.Load(this);
     }
 

@@ -1,7 +1,7 @@
-﻿using Avalonia;
-using Avalonia.ReactiveUI;
-using System;
+﻿using System;
 using System.Reflection;
+using Avalonia;
+using Avalonia.ReactiveUI;
 using ReactiveUI;
 using Splat;
 

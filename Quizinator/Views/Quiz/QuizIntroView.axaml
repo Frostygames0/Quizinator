@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Quizinator.Views.Quiz.QuizIntroView">
+    <StackPanel Spacing="10">
+        <StackPanel.Styles>
+            <Style Selector="TextBlock">
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+        </StackPanel.Styles>
+
+        <TextBlock Classes="h2"
+                   Text="{Binding Name}" />
+        <TextBlock Classes="h3"
+                   Text="{Binding Description}" />
+        <TextBlock Classes="h3"
+                   Text="{Binding Author}" />
+        <TextBlock Classes="ultraSmall"
+                   Text="{Binding QuestionCount}" />
+    </StackPanel>
+</UserControl>

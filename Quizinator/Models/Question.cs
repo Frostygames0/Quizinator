@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace Quizinator.Models;
 
 public class Question
 {
-    [JsonInclude]
-    [JsonPropertyName("CorrectAnswerIndex")]
-    private readonly int _correctAnswerIndex;
+    private int _givenAnswer = 0;
+    private bool _wasAnsweredBefore;
 
-    private int _givenAnswer;
-    private bool _wasAnswered;
-    
-    [JsonPropertyName("Question")]
+    [JsonPropertyName("question")]
     public string LiteralQuestion { get; }
+    [JsonPropertyName("answers")]
     public IList<string> Answers { get; }
+    [JsonPropertyName("correctAnswerIndex")]
+    public int CorrectAnswerIndex { get; }
     
+    [JsonConstructor]
     public Question(string literalQuestion, IList<string> answers, int correctAnswerIndex)
     {
         LiteralQuestion = literalQuestion;
@@ -26,24 +25,24 @@ public class Question
         if (!ValidateIndex(correctAnswerIndex))
             throw new ArgumentOutOfRangeException(
                 $"Index should be in range of [0,{Answers.Count}]! Was: {correctAnswerIndex}");
-        
-        _correctAnswerIndex = correctAnswerIndex;
+
+        CorrectAnswerIndex = correctAnswerIndex;
     }
     
     public bool TryAnswer(int index)
     {
-        if (!ValidateIndex(index) || _wasAnswered) 
+        if (!ValidateIndex(index)) 
             return false;
         
         _givenAnswer = index;
-        _wasAnswered = true;
-        
+        _wasAnsweredBefore = true;
+
         return true;
     }
 
     public bool CheckAnswer()
     {
-        return _givenAnswer == _correctAnswerIndex;
+        return _givenAnswer == CorrectAnswerIndex && _wasAnsweredBefore;
     }
 
     private bool ValidateIndex(int index)

@@ -1,5 +1,4 @@
 ﻿using System.Reactive;
-using System.Reactive.Linq;
 using ReactiveUI;
 
 namespace Quizinator.ViewModels;
@@ -14,7 +13,7 @@ public class MenuViewModel : ViewModelBase, IRoutableViewModel, IActivatableView
     public string? UrlPathSegment { get; }
     public IScreen HostScreen { get; }
 
-    public MenuViewModel(IScreen hostScreen, Interaction<CreateQuizViewModel, string?> openDialog) // TODO UGH I HATE OPEN DIALOG
+    public MenuViewModel(IScreen hostScreen) // TODO UGH I HATE OPEN DIALOG
     {
         Activator = new ViewModelActivator();
         
@@ -24,10 +23,10 @@ public class MenuViewModel : ViewModelBase, IRoutableViewModel, IActivatableView
         CreateNewQuiz = ReactiveCommand.CreateFromTask(async () =>
         {
             var createQuiz = new CreateQuizViewModel();
-            var result = await openDialog.Handle(createQuiz);
+            //var result = await openDialog.Handle(createQuiz);
         });
 
         OpenQuizLibrary = ReactiveCommand.CreateFromObservable(
-            () => hostScreen.Router.Navigate.Execute(new QuizLibraryViewModel(hostScreen, openDialog)));
+            () => hostScreen.Router.Navigate.Execute(new LibraryViewModel(hostScreen, Paths.Quizzes))); // TODO Replace hard coded paths with settings
     }
 }

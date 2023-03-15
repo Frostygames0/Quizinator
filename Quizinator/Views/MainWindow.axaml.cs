@@ -19,7 +19,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         {
             DataContext = interaction.Input
         };
-        
+
         var result = await dialog.ShowDialog<string>(this);
         interaction.SetOutput(result);
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Avalonia.ReactiveUI;
-using ReactiveUI;
 using Quizinator.ViewModels;
+using ReactiveUI;
 
 namespace Quizinator.Views;
 

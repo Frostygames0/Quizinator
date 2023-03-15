@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Reactive;
+﻿using System.Reactive;
 using ReactiveUI;
 
 namespace Quizinator.ViewModels;

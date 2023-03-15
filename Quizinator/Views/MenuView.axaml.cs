@@ -1,9 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.ReactiveUI;
+﻿using Avalonia.ReactiveUI;
 using Quizinator.ViewModels;
 using ReactiveUI;
 

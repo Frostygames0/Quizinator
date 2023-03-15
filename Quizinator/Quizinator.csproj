@@ -33,12 +33,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Views\CreateQuiz\CreateQuizWindow.axaml.cs">
-        <DependentUpon>CreateQuizWindow.axaml</DependentUpon>
+      <Compile Update="Views\LibraryView.axaml.cs">
+        <DependentUpon>QuizLibraryView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Views\QuizLibraryView.axaml.cs">
-        <DependentUpon>QuizLibraryView.axaml</DependentUpon>
+      <Compile Update="Views\CreateQuizWindow.axaml.cs">
+        <DependentUpon>CreateQuizWindow.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
     </ItemGroup>

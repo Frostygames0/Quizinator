@@ -3,17 +3,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Quizinator.Models"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="350"
-             x:Class="Quizinator.Views.QuizLibraryView">
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Quizinator.Views.LibraryView">
     <UserControl.DataTemplates>
         <DataTemplate DataType="{x:Type local:Quiz}">
             <StackPanel HorizontalAlignment="Stretch">
-                <TextBlock Text="{Binding DisplayName}"
+                <TextBlock Text="{Binding Name}"
                            FontSize="25" 
                            FontWeight="Thin"/>
                 <TextBlock Text="{Binding Description}"
                            FontWeight="Thin"/>
-                <TextBlock Text="{Binding QuestionCount}"/>
+                <TextBlock Text="{Binding Author}"
+                           FontSize="10"
+                           FontWeight="Thin"/>
             </StackPanel>
         </DataTemplate>
     </UserControl.DataTemplates>
@@ -23,10 +25,10 @@
             Выберите викторину
         </TextBlock>
         <ListBox Items="{Binding FoundQuizzes}" 
-                 SelectedItem="{Binding ChosenQuiz}"
-                 Background="Gray"
-                 Width="500" Height="200"
+                 SelectedItem="{Binding SelectedQuiz}"
                  HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 SelectionMode="AlwaysSelected"
                  ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListBox.Styles>
                 <Style Selector="ListBoxItem">
@@ -35,8 +37,10 @@
             </ListBox.Styles>
         </ListBox>
         <WrapPanel HorizontalAlignment="Center">
-            <Button IsEnabled="False">Начать викторину</Button>
+            <Button Command="{Binding Start}"
+                    IsEnabled="{Binding SelectedQuiz, Converter={x:Static ObjectConverters.IsNotNull}}">Начать викторину</Button>
             <Button Command="{Binding ReturnToMenu}">Назад в меню</Button>
+            <Button Command="{Binding RefreshSearch}">Обновить</Button>
         </WrapPanel>
     </StackPanel>
 </UserControl>
