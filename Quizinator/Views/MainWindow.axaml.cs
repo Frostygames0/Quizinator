@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Avalonia.ReactiveUI;
 using Quizinator.ViewModels;
 using ReactiveUI;
@@ -9,18 +8,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
     public MainWindow()
     {
-        this.WhenActivated(disposables => disposables(ViewModel!.ShowCreatingDialog.RegisterHandler(ShowCreationDialogAsync)));
+        this.WhenActivated(disposables => { });
         InitializeComponent();
-    }
-    
-    private async Task ShowCreationDialogAsync(InteractionContext<CreateQuizViewModel, string?> interaction)
-    {
-        var dialog = new CreateQuizWindow
-        {
-            DataContext = interaction.Input
-        };
-
-        var result = await dialog.ShowDialog<string>(this);
-        interaction.SetOutput(result);
     }
 }

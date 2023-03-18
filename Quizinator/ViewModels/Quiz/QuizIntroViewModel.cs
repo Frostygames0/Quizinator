@@ -10,7 +10,7 @@ public class QuizIntroViewModel : ViewModelBase, IRoutableViewModel
     public string Description => _quiz.Description;
     public string Author => _quiz.Author;
 
-    public string QuestionCount => $"0/{_quiz.Questions.Count}";
+    public int QuestionCount => _quiz.Questions.Count;
     
     public string? UrlPathSegment { get; }
     public IScreen HostScreen { get; }

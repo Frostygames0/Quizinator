@@ -1,17 +1,16 @@
-﻿using ReactiveUI;
+﻿using System.Reactive.Disposables;
+using ReactiveUI;
 
 namespace Quizinator.ViewModels;
 
-public class MainWindowViewModel : ViewModelBase, IScreen
+public class MainWindowViewModel : ViewModelBase, IScreen, IActivatableViewModel
 {
+    public ViewModelActivator Activator { get; } = new();
     public RoutingState Router { get; } = new();
-
-    public Interaction<CreateQuizViewModel, string?> ShowCreatingDialog { get; }
 
     public MainWindowViewModel()
     {
-        ShowCreatingDialog = new Interaction<CreateQuizViewModel, string?>();
-        
-        Router.Navigate.Execute(new MenuViewModel(this));
+        this.WhenActivated((CompositeDisposable disposable) 
+            => Router.Navigate.Execute(new MenuViewModel(this)));
     }
 }

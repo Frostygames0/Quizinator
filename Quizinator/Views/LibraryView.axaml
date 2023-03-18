@@ -9,36 +9,41 @@
         <DataTemplate DataType="{x:Type local:Quiz}">
             <StackPanel HorizontalAlignment="Stretch">
                 <TextBlock Text="{Binding Name}"
-                           FontSize="25" 
-                           FontWeight="Thin"/>
-                <TextBlock Text="{Binding Description}"
-                           FontWeight="Thin"/>
-                <TextBlock Text="{Binding Author}"
+                           TextWrapping="Wrap"
+                           FontSize="25"
+                           FontWeight="Thin" />
+                <TextBlock Text="{Binding Description, StringFormat='Описание: {0}'}"
+                           TextWrapping="Wrap"
+                           FontWeight="Thin" />
+                <TextBlock Text="{Binding Author, StringFormat='Автор: {0}'}"
+                           TextWrapping="Wrap"
                            FontSize="10"
-                           FontWeight="Thin"/>
+                           FontWeight="Thin" />
             </StackPanel>
         </DataTemplate>
     </UserControl.DataTemplates>
-    
-    <StackPanel Spacing="10">
+
+    <StackPanel Spacing="10"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
         <TextBlock Classes="h2" HorizontalAlignment="Center">
             Выберите викторину
         </TextBlock>
-        <ListBox Items="{Binding FoundQuizzes}" 
+        <ListBox Items="{Binding FoundQuizzes}"
                  SelectedItem="{Binding SelectedQuiz}"
-                 HorizontalAlignment="Stretch"
-                 VerticalAlignment="Stretch"
                  SelectionMode="AlwaysSelected"
                  ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListBox.Styles>
                 <Style Selector="ListBoxItem">
-                    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
                 </Style>
             </ListBox.Styles>
         </ListBox>
         <WrapPanel HorizontalAlignment="Center">
             <Button Command="{Binding Start}"
-                    IsEnabled="{Binding SelectedQuiz, Converter={x:Static ObjectConverters.IsNotNull}}">Начать викторину</Button>
+                    IsEnabled="{Binding SelectedQuiz, Converter={x:Static ObjectConverters.IsNotNull}}">
+                Начать викторину
+            </Button>
             <Button Command="{Binding ReturnToMenu}">Назад в меню</Button>
             <Button Command="{Binding RefreshSearch}">Обновить</Button>
         </WrapPanel>

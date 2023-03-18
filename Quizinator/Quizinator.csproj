@@ -12,6 +12,11 @@
         <Authors>Frostygames0</Authors>
         <Company>Frostygames0</Company>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<AvaloniaNameGeneratorBehavior>InitializeComponent</AvaloniaNameGeneratorBehavior>
+        <AvaloniaNameGeneratorDefaultFieldModifier>internal</AvaloniaNameGeneratorDefaultFieldModifier>
+        <AvaloniaNameGeneratorFilterByPath>*</AvaloniaNameGeneratorFilterByPath>
+        <AvaloniaNameGeneratorFilterByNamespace>*</AvaloniaNameGeneratorFilterByNamespace>
+        <AvaloniaNameGeneratorViewFileNamingStrategy>NamespaceAndClassName</AvaloniaNameGeneratorViewFileNamingStrategy>
     </PropertyGroup>
 
     <ItemGroup>
@@ -29,6 +34,9 @@
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
         <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.18" />
+        <PackageReference Include="ReactiveUI.Fody" Version="18.4.26" />
+        <PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
+        <PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0" />
         <PackageReference Include="XamlNameReferenceGenerator" Version="1.6.1" />
     </ItemGroup>
 
@@ -37,9 +45,15 @@
         <DependentUpon>QuizLibraryView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
-      <Compile Update="Views\CreateQuizWindow.axaml.cs">
-        <DependentUpon>CreateQuizWindow.axaml</DependentUpon>
+      <Compile Update="Views\Dialogs\CreateQuizDialogView.axaml.cs">
+        <DependentUpon>CreateQuizDialogView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Assets\Fonts\NTSomic-Bold.ttf" />
+      <UpToDateCheckInput Remove="Assets\Fonts\NTSomic-Medium.ttf" />
+      <UpToDateCheckInput Remove="Assets\Fonts\NTSomic-Regular.ttf" />
     </ItemGroup>
 </Project>

@@ -27,7 +27,7 @@ public class QuizTesing
         };
         
         _quiz = new Quiz("Test Quiz", "Lorem ipsum dolor sit amet", "Testing", questions);
-        
+
         Debug.WriteLine(_quiz);
     }
 

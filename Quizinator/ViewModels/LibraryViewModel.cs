@@ -1,57 +1,63 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Reactive.Disposables;
+using System.Threading.Tasks;
 using DynamicData;
+using Quizinator.Models;
 using Quizinator.ViewModels.Quiz;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+using Splat;
 
 namespace Quizinator.ViewModels;
 
 public class LibraryViewModel : ViewModelBase, IRoutableViewModel, IActivatableViewModel
 {
-    private Models.Quiz? _selectedQuiz;
-
-    public Models.Quiz? SelectedQuiz
-    {
-        get => _selectedQuiz;
-        set => this.RaiseAndSetIfChanged(ref _selectedQuiz, value);
-    }
+    private readonly IQuizSearcher _quizSearcher;
     
+    [Reactive]
+    public Models.Quiz? SelectedQuiz { get; set; }
+
     public ObservableCollection<Models.Quiz> FoundQuizzes { get; }
 
     public ReactiveCommand<Unit, IRoutableViewModel> ReturnToMenu { get; }
-    public ReactiveCommand<Unit, Unit> RefreshSearch { get; }
+    public ReactiveCommand<Unit, bool> RefreshSearch { get; }
     public ReactiveCommand<Unit, IRoutableViewModel> Start { get; }
 
     public string? UrlPathSegment { get; }
     public IScreen HostScreen { get; }
 
     public ViewModelActivator Activator { get; } = new();
-
-    public LibraryViewModel(IScreen hostScreen, string searchLocation)
+    
+    public LibraryViewModel(IScreen hostScreen, string? searchLocation = null, IQuizSearcher? quizSearcher = null)
     {
         HostScreen = hostScreen;
         UrlPathSegment = "quiz_library";
 
         FoundQuizzes = new ObservableCollection<Models.Quiz>();
+        _quizSearcher = quizSearcher ?? Locator.Current.GetService<IQuizSearcher>();
 
+        var hostRouter = HostScreen.Router;
         ReturnToMenu = ReactiveCommand.CreateFromObservable(
-            () => hostScreen.Router.NavigateAndReset.Execute(new MenuViewModel(hostScreen)));
-
+            () => hostRouter.NavigateAndReset.Execute(new MenuViewModel(hostScreen))); // TODO make factory for this or service
+        
         Start = ReactiveCommand.CreateFromObservable(
-            () => hostScreen.Router.NavigateAndReset.Execute(new QuizViewModel(hostScreen, SelectedQuiz)));
+            () => hostRouter.NavigateAndReset.Execute(new QuizViewModel(hostScreen, SelectedQuiz))); // TODO make factory for this or service
 
-        RefreshSearch = ReactiveCommand.Create(() => RefreshFoundQuizzes(searchLocation));
-        this.WhenActivated((CompositeDisposable disposables) =>
-        {
-            RefreshFoundQuizzes(searchLocation);
-        });
+        RefreshSearch = ReactiveCommand.CreateFromTask(() => RefreshFoundQuizzes(searchLocation));
+        this.WhenActivated((CompositeDisposable disposables) => RefreshSearch.Execute());
     }
-
-    private async void RefreshFoundQuizzes(string searchLocation)
+    
+    // TODO I don't really like this, maybe quiz searcher should use rx to update search?
+    private async Task<bool> RefreshFoundQuizzes(string? searchLocation)
     {
+        bool updated = await _quizSearcher.TryUpdateSearch(searchLocation);
+        if (!updated) 
+            return updated;
+            
         FoundQuizzes.Clear();
-        var quizzes = await Models.Quiz.FindQuizzesAsync(searchLocation);
-        FoundQuizzes.AddRange(quizzes);
+        FoundQuizzes.AddRange(_quizSearcher.FoundQuizzes);
+
+        return updated;
     }
 }

@@ -16,8 +16,8 @@
         <TextBlock Classes="h3"
                    Text="{Binding Description}" />
         <TextBlock Classes="h3"
-                   Text="{Binding Author}" />
+                   Text="{Binding Author, StringFormat='Автор - {0}'}" />
         <TextBlock Classes="ultraSmall"
-                   Text="{Binding QuestionCount}" />
+                   Text="{Binding QuestionCount, StringFormat='Вопросов - 0/{0}'}" />
     </StackPanel>
 </UserControl>

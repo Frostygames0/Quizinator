@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Quizinator.Models;
 
@@ -45,28 +42,5 @@ public class Quiz
         }
 
         return builder.ToString();
-    }
-
-    public static async Task<IEnumerable<Quiz>> FindQuizzesAsync(string searchDirectory)
-    {
-        var quizzes = new List<Quiz>();
-        
-        if (!Directory.Exists(searchDirectory))
-            return quizzes;
-        
-        var foundFiles = Directory.EnumerateFiles(searchDirectory, "*.json");
-        
-        foreach(var file in foundFiles)
-        {
-            await using var stream = File.OpenRead(file);
-            Quiz? result = await JsonSerializer.DeserializeAsync<Quiz>(stream);
-            
-            if (result is null)
-                continue;
-
-            quizzes.Add(result);
-        }
-
-        return quizzes;
     }
 }

@@ -15,7 +15,7 @@ public class QuizViewModel : ViewModelBase, IScreen, IRoutableViewModel, IActiva
     public RoutingState Router { get; } = new();
     public string? UrlPathSegment { get; }
     public IScreen HostScreen { get; }
-
+    
     public QuizViewModel(IScreen hostScreen, Models.Quiz quiz)
     {
         _quiz = quiz;

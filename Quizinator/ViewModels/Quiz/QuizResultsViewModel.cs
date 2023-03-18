@@ -12,7 +12,7 @@ public class QuizResultsViewModel : ViewModelBase, IRoutableViewModel, IActivata
     public IScreen HostScreen { get; }
     
     public ReactiveCommand<Unit, IRoutableViewModel> GoBackToMenu { get; }
-
+    
     public QuizResultsViewModel(IScreen hostScreen, Models.Quiz quiz)
     {
         HostScreen = hostScreen;

@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" Width="600" Height="270" CanResize="False"
-        x:Class="Quizinator.Views.CreateQuizWindow"
+        x:Class="Quizinator.Views.Dialogs.CreateQuizDialogView"
         
         Title="Create Quiz"
         
