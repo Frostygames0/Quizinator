@@ -86,7 +86,7 @@
                 <PathIcon Data="{StaticResource  add_square_regular}" />
             </Button>
 
-            <Button Grid.Column="1" Command="{Binding BeginQuiz}">
+            <Button Grid.Column="1" IsEnabled="{Binding SelectedQuiz, Converter={x:Static ObjectConverters.IsNotNull}}" Command="{Binding BeginQuiz}">
                 <PathIcon Data="{StaticResource  play}" />
             </Button>
 
