@@ -1,0 +1,98 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:localization="clr-namespace:Quizinator.Assets.Localization"
+             xmlns:models="clr-namespace:Quizinator.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Quizinator.Views.MainMenuView">
+    
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+        </Style>
+    </UserControl.Styles>
+    
+    <Grid ColumnDefinitions="3.5*,*"
+          RowDefinitions="*,6*,55">
+        <Viewbox Grid.Row="0" Grid.Column="0">
+            <TextBlock Classes="h1"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Text="{x:Static localization:Resources.AppName}"/>
+        </Viewbox>
+        
+        <!-- Quiz Description-->
+        <TextBlock Classes="h3"
+                   Grid.Row="1" Grid.Column="1"
+                   Margin="5"
+                   Text="{Binding SelectedQuiz.Description}"
+                   TextWrapping="Wrap"/>
+        
+        <ListBox Grid.Row="1" Grid.Column="0" 
+                 Items="{Binding FoundQuizzes}"
+                 SelectedItem="{Binding SelectedQuiz}"
+                 SelectionMode="AlwaysSelected"
+                 ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 Margin="5">
+            <ListBox.DataTemplates>
+                <DataTemplate DataType="{x:Type models:Quiz}">
+                    <StackPanel HorizontalAlignment="Stretch">
+                        <TextBlock Text="{Binding Name}"
+                                   TextWrapping="Wrap"
+                                   FontSize="25"
+                                   FontWeight="Thin" />
+                        <TextBlock Text="{Binding Author, StringFormat='{x:Static localization:Resources.LibraryAuthor}'}"
+                                   TextWrapping="Wrap"
+                                   FontWeight="Thin" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.DataTemplates>
+            
+            <ListBox.Styles>
+                <Style Selector="ListBoxItem">
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                </Style>
+            </ListBox.Styles>
+        </ListBox>
+        
+        <TextBlock Classes="h2"
+            Grid.Row="1" Grid.Column="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="test"
+            Foreground="Gray"
+            IsVisible="{Binding !FoundQuizzes.Count}"/>
+        
+        <Grid Grid.Row="2" Grid.Column="0" 
+              ColumnDefinitions="*, *, 0.1*, 10*"
+              Margin="5">
+            <TextBox Grid.Column="3"></TextBox>
+            <Button Grid.Column="0" Command="{Binding RefreshSearch}">
+                <PathIcon Data="{StaticResource  refresh}" />
+            </Button>
+
+            <Button Grid.Column="1" Command="{Binding OpenSearchFolder}">
+                <PathIcon Data="{StaticResource  folder}" />
+            </Button>
+        </Grid>
+        
+        <Grid Grid.Row="2" Grid.Column="1" 
+              ColumnDefinitions="*, *, *"
+              Margin="0 5 5 5">
+            
+            <Button Grid.Column="0" IsEnabled="False" Command="{Binding NewQuiz}">
+                <PathIcon Data="{StaticResource  add_square_regular}" />
+            </Button>
+
+            <Button Grid.Column="1" Command="{Binding BeginQuiz}">
+                <PathIcon Data="{StaticResource  play}" />
+            </Button>
+
+            <Button Grid.Column="2" IsEnabled="False" Command="{Binding Settings}">
+                <PathIcon Data="{StaticResource  settings_regular}" />
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,4 +1,5 @@
-﻿using System.Reactive;
+﻿using System;
+using System.Reactive;
 using Quizinator.Extensions;
 using Quizinator.Models.Dialog;
 using Quizinator.ViewModels.Dialogs;
@@ -7,6 +8,7 @@ using Splat;
 
 namespace Quizinator.ViewModels;
 
+[Obsolete("Merged into MainMenuViewModel")]
 public class MenuViewModel : ViewModelBase, IRoutableViewModel, IActivatableViewModel
 {
     private readonly IDialogDisplayer _dialogDisplayer;

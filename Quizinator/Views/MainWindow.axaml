@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:rxui="http://reactiveui.net"
         xmlns:localization="clr-namespace:Quizinator.Assets.Localization"
-        mc:Ignorable="d" Width="800" Height="450" CanResize="false"
+        mc:Ignorable="d" Width="800" Height="450"
         x:Class="Quizinator.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
 
@@ -29,15 +29,11 @@
                     BackgroundSource="Digger"
                     TintColor="Black"
                     TintOpacity="1"
-                    MaterialOpacity="0.50" />
+                    MaterialOpacity="0.5" />
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
-
-        <StackPanel Margin="30" 
-                    Spacing="60"
-                    HorizontalAlignment="Center">
-            <rxui:RoutedViewHost Router="{Binding Router}" />
-        </StackPanel>
+        
+        <rxui:RoutedViewHost Router="{Binding Router}" />
     </Panel>
 
 </Window>

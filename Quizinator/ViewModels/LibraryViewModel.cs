@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using Splat;
 
 namespace Quizinator.ViewModels;
 
+[Obsolete("Merged into MainMenuViewModel")]
 public class LibraryViewModel : ViewModelBase, IRoutableViewModel, IActivatableViewModel
 {
     private readonly IQuizSearcher _quizSearcher;

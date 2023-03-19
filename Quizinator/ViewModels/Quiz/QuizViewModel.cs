@@ -33,7 +33,7 @@ public class QuizViewModel : ViewModelBase, IScreen, IRoutableViewModel, IActiva
         {
             if (_questionViewModels.Count == 0)
             {
-                return hostScreen.Router.NavigateAndReset.Execute(new QuizResultsViewModel(hostScreen, _quiz)); // TODO Temp workaround
+                return hostScreen.Router.NavigateAndReset.Execute(new QuizResultsViewModel(hostScreen, _quiz));
             }
             
             return Router.NavigateAndReset.Execute(_questionViewModels.Dequeue());
