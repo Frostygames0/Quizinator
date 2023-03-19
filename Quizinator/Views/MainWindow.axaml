@@ -4,12 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:rxui="http://reactiveui.net"
+        xmlns:localization="clr-namespace:Quizinator.Assets.Localization"
         mc:Ignorable="d" Width="800" Height="450" CanResize="false"
         x:Class="Quizinator.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
 
         Icon="/Assets/Images/quizinator_logo.ico"
-        Title="Quizinator"
+        Title="{x:Static localization:Resources.AppName}"
 
         TransparencyLevelHint="AcrylicBlur"
         Background="Transparent"

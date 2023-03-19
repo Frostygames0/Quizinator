@@ -5,7 +5,7 @@ using Quizinator.Models;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-namespace Quizinator.ViewModels;
+namespace Quizinator.ViewModels.Quiz;
 
 public class QuestionViewModel : ViewModelBase, IRoutableViewModel
 {

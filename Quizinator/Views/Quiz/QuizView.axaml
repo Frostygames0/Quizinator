@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rxui="http://reactiveui.net"
+             xmlns:localization="clr-namespace:Quizinator.Assets.Localization"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Quizinator.Views.Quiz.QuizView">
     <StackPanel Spacing="15">
@@ -11,11 +12,14 @@
                 <Setter Property="HorizontalAlignment" Value="Center" />
             </Style>
         </StackPanel.Styles>
-        <rxui:RoutedViewHost Router="{Binding Router}">
+        <rxui:RoutedViewHost Router="{Binding Router}"
+                             PageTransition="{x:Null}">
             <rxui:RoutedViewHost.DefaultContent>
-                <TextBlock Classes="h2">Загрузка...</TextBlock>
+                <TextBlock Classes="h2"
+                           Text="{x:Static localization:Resources.Loading}" />
             </rxui:RoutedViewHost.DefaultContent>
         </rxui:RoutedViewHost>
-        <Button Command="{Binding Next}">Дальше</Button>
+        <Button Command="{Binding Next}"
+                Content="{x:Static localization:Resources.Next}" />
     </StackPanel>
 </UserControl>

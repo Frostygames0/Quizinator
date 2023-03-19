@@ -1,7 +1,7 @@
 using System.Reactive;
 using ReactiveUI;
 
-namespace Quizinator.ViewModels;
+namespace Quizinator.ViewModels.Quiz;
 
 public class QuizResultsViewModel : ViewModelBase, IRoutableViewModel, IActivatableViewModel
 {
@@ -11,7 +11,7 @@ public class QuizResultsViewModel : ViewModelBase, IRoutableViewModel, IActivata
     public string? UrlPathSegment { get; }
     public IScreen HostScreen { get; }
     
-    public ReactiveCommand<Unit, IRoutableViewModel> GoBackToMenu { get; }
+    public ReactiveCommand<Unit, IRoutableViewModel> Back { get; }
     
     public QuizResultsViewModel(IScreen hostScreen, Models.Quiz quiz)
     {
@@ -20,7 +20,7 @@ public class QuizResultsViewModel : ViewModelBase, IRoutableViewModel, IActivata
         
         ResultsFormatted = $"{quiz.CalculateResults()}/{quiz.Questions.Count}"; // TODO IDK IF THIS CORRECT (BUT WORKS)
         
-        GoBackToMenu = ReactiveCommand.CreateFromObservable(
+        Back = ReactiveCommand.CreateFromObservable(
             () => hostScreen.Router.NavigateAndReset.Execute(new MenuViewModel(hostScreen)));
     }
 }

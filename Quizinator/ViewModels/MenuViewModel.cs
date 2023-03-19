@@ -1,4 +1,5 @@
 ﻿using System.Reactive;
+using Quizinator.Extensions;
 using Quizinator.Models.Dialog;
 using Quizinator.ViewModels.Dialogs;
 using ReactiveUI;
@@ -8,12 +9,12 @@ namespace Quizinator.ViewModels;
 
 public class MenuViewModel : ViewModelBase, IRoutableViewModel, IActivatableViewModel
 {
-    private readonly IDialogDisplayer? _dialogDisplayer;
+    private readonly IDialogDisplayer _dialogDisplayer;
     
     public ViewModelActivator Activator { get; }
     
-    public ReactiveCommand<Unit, Unit> CreateNewQuiz { get; }
-    public ReactiveCommand<Unit, IRoutableViewModel> OpenQuizLibrary { get; }
+    public ReactiveCommand<Unit, Unit> NewQuiz { get; }
+    public ReactiveCommand<Unit, IRoutableViewModel> OpenLibrary { get; }
     
     public string? UrlPathSegment { get; }
     public IScreen HostScreen { get; }
@@ -25,14 +26,17 @@ public class MenuViewModel : ViewModelBase, IRoutableViewModel, IActivatableView
         HostScreen = hostScreen;
         UrlPathSegment = "menu";
 
-        _dialogDisplayer = dialogDisplayer ?? Locator.Current.GetService<IDialogDisplayer>();
+        _dialogDisplayer = dialogDisplayer ?? Locator.Current.GetImportantService<IDialogDisplayer>();
 
-        CreateNewQuiz = ReactiveCommand.CreateFromTask(async () =>
+        NewQuiz = ReactiveCommand.CreateFromTask(async () =>
         {
-            var result = await _dialogDisplayer.ShowDialogAsync<CreateQuizDialogViewModel, string>(new CreateQuizDialogViewModel());
+            var result =
+                await _dialogDisplayer.ShowDialogAsync<CreateQuizDialogViewModel, string>(
+                    new CreateQuizDialogViewModel());
+            // TODO Do something after this lol
         });
 
-        OpenQuizLibrary = ReactiveCommand.CreateFromObservable(
+        OpenLibrary = ReactiveCommand.CreateFromObservable(
             () => hostScreen.Router.Navigate.Execute(new LibraryViewModel(hostScreen)));
     }
 }

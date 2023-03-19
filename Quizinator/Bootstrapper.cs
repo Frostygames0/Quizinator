@@ -1,6 +1,7 @@
 using System.Reflection;
 using Quizinator.Models;
 using Quizinator.Models.Dialog;
+using Quizinator.Views.Providers;
 using ReactiveUI;
 using Splat;
 
@@ -21,6 +22,8 @@ public static class Bootstrapper
 
     private static void RegisterServices(IMutableDependencyResolver mutable)
     {
+        mutable.RegisterLazySingleton(() => new MainWindowProvider(), typeof(IMainWindowProvider));
+        mutable.RegisterLazySingleton(() => new SystemDialogDisplayer(), typeof(ISystemDialogDisplayer));
         mutable.RegisterLazySingleton(() => new DialogDisplayer(), typeof(IDialogDisplayer));
         mutable.RegisterLazySingleton(() => new QuizSearcher(Directories.Quizzes), typeof(IQuizSearcher));
     }

@@ -9,11 +9,11 @@ public class CreateQuizDialogViewModel : DialogViewModelBase<string>
 {
     [Reactive] 
     public string? TestText { get; set; }
-
-    public ReactiveCommand<Unit, string?> FinalizeCreation { get; }
+    
+    public ReactiveCommand<Unit, Unit> FinishCreation { get; }
 
     public CreateQuizDialogViewModel()
     {
-        FinalizeCreation = ReactiveCommand.Create(() => TestText);
+        FinishCreation = ReactiveCommand.Create(() => Close(TestText));
     }
 }

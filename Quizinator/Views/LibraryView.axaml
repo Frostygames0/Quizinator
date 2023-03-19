@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Quizinator.Models"
+             xmlns:localization="clr-namespace:Quizinator.Assets.Localization"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Quizinator.Views.LibraryView">
     <UserControl.DataTemplates>
@@ -12,10 +13,10 @@
                            TextWrapping="Wrap"
                            FontSize="25"
                            FontWeight="Thin" />
-                <TextBlock Text="{Binding Description, StringFormat='Описание: {0}'}"
+                <TextBlock Text="{Binding Description, StringFormat='{x:Static localization:Resources.LibraryDescription}'}"
                            TextWrapping="Wrap"
                            FontWeight="Thin" />
-                <TextBlock Text="{Binding Author, StringFormat='Автор: {0}'}"
+                <TextBlock Text="{Binding Author, StringFormat='{x:Static localization:Resources.LibraryAuthor}'}"
                            TextWrapping="Wrap"
                            FontSize="10"
                            FontWeight="Thin" />
@@ -26,9 +27,10 @@
     <StackPanel Spacing="10"
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch">
-        <TextBlock Classes="h2" HorizontalAlignment="Center">
-            Выберите викторину
-        </TextBlock>
+        <TextBlock Classes="h2"
+                   HorizontalAlignment="Center"
+                   Text="{x:Static localization:Resources.LibrarySelectQuiz}" />
+
         <ListBox Items="{Binding FoundQuizzes}"
                  SelectedItem="{Binding SelectedQuiz}"
                  SelectionMode="AlwaysSelected"
@@ -41,11 +43,12 @@
         </ListBox>
         <WrapPanel HorizontalAlignment="Center">
             <Button Command="{Binding Start}"
-                    IsEnabled="{Binding SelectedQuiz, Converter={x:Static ObjectConverters.IsNotNull}}">
-                Начать викторину
-            </Button>
-            <Button Command="{Binding ReturnToMenu}">Назад в меню</Button>
-            <Button Command="{Binding RefreshSearch}">Обновить</Button>
+                    Content="{x:Static localization:Resources.LibraryBeginQuiz}"
+                    IsEnabled="{Binding SelectedQuiz, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+            <Button Command="{Binding ReturnToMenu}"
+                    Content="{x:Static localization:Resources.ReturnToMenu}" />
+            <Button Command="{Binding RefreshSearch}"
+                    Content="{x:Static localization:Resources.Refresh}" />
         </WrapPanel>
     </StackPanel>
 </UserControl>

@@ -9,7 +9,7 @@ public static class Directories
 
     public static readonly string Quizzes = Path.Combine(App, "quizzes");
 
-    public static void CreateApplicationDirectories()
+    public static void CreateAppDirectories()
     {
         Directory.CreateDirectory(Quizzes); 
     }

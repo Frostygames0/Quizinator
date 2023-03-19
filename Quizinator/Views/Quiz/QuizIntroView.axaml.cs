@@ -6,7 +6,5 @@ namespace Quizinator.Views.Quiz;
 public partial class QuizIntroView : ReactiveUserControl<QuizIntroViewModel>
 {
     public QuizIntroView()
-    {
-        InitializeComponent();
-    }
+        => InitializeComponent();
 }

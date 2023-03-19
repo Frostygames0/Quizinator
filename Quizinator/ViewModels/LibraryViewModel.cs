@@ -3,6 +3,7 @@ using System.Reactive;
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
 using DynamicData;
+using Quizinator.Extensions;
 using Quizinator.Models;
 using Quizinator.ViewModels.Quiz;
 using ReactiveUI;
@@ -35,7 +36,7 @@ public class LibraryViewModel : ViewModelBase, IRoutableViewModel, IActivatableV
         UrlPathSegment = "quiz_library";
 
         FoundQuizzes = new ObservableCollection<Models.Quiz>();
-        _quizSearcher = quizSearcher ?? Locator.Current.GetService<IQuizSearcher>();
+        _quizSearcher = quizSearcher ?? Locator.Current.GetImportantService<IQuizSearcher>();
 
         var hostRouter = HostScreen.Router;
         ReturnToMenu = ReactiveCommand.CreateFromObservable(

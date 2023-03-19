@@ -2,15 +2,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:localization="clr-namespace:Quizinator.Assets.Localization"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Quizinator.Views.MenuView">
     
     <DockPanel HorizontalAlignment="Stretch"
                VerticalAlignment="Stretch">
         <TextBlock Classes="h1" DockPanel.Dock="Top"
-                   HorizontalAlignment="Center">
-            ВикторинатоР
-        </TextBlock>
+                   HorizontalAlignment="Center" 
+                   Text="{x:Static localization:Resources.AppName}"/>
 
         <StackPanel DockPanel.Dock="Bottom"
                     Spacing="10"
@@ -27,12 +27,8 @@
                 </Style>
             </StackPanel.Styles>
 
-            <Button Command="{Binding OpenQuizLibrary}">
-                Начать Викторину
-            </Button>
-            <Button Command="{Binding CreateNewQuiz}">
-                Создать Викторину
-            </Button>
+            <Button Command="{Binding OpenLibrary}" Content="{x:Static localization:Resources.OpenLibrary}"/>
+            <Button Command="{Binding NewQuiz}" Content="{x:Static localization:Resources.NewQuiz}"/>
         </StackPanel>
     </DockPanel>
 

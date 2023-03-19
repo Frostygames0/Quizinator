@@ -10,7 +10,7 @@ class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        Directories.CreateApplicationDirectories();
+        Directories.CreateAppDirectories();
         Bootstrapper.Bootstrap(Locator.CurrentMutable);
 
         BuildAvaloniaApp()

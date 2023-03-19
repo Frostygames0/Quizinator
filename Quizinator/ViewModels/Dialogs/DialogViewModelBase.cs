@@ -1,21 +1,22 @@
-using ReactiveUI;
+using System;
 
 namespace Quizinator.ViewModels.Dialogs;
 
 public abstract class DialogViewModelBase<TResult> : ViewModelBase
 {
-    public ReactiveCommand<TResult, TResult> Close { get; }
-
-    protected DialogViewModelBase()
+    public event EventHandler<DialogResultEventArgs<TResult>> RequestedClosing;
+    
+    protected void Close(TResult result)
     {
-        /*Close = ReactiveCommand.Create(input =>
-        {
-            return input;
-        });*/
+        var args = new DialogResultEventArgs<TResult>(result);
+        RequestedClosing?.Invoke(this, args);
     }
+}
 
-    protected void CloseDialog(TResult result)
-    {
-        Close.Execute();
-    }
+public class DialogResultEventArgs<TResult> : EventArgs
+{
+    public TResult Result { get; }
+
+    public DialogResultEventArgs(TResult result)
+        => Result = result;
 }

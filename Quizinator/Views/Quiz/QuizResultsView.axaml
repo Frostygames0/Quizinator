@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:localization="clr-namespace:Quizinator.Assets.Localization"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Quizinator.Views.Quiz.QuizResultsView">
     <StackPanel Spacing="10">
@@ -11,10 +12,12 @@
             </Style>
         </StackPanel.Styles>
         
-        <TextBlock Classes="h2">Вы завершили тест!</TextBlock>
-        <TextBlock Classes="h3">Ваши результаты:</TextBlock>
+        <TextBlock Classes="h2" Text="{x:Static localization:Resources.TestCompleted}"/>
+        <TextBlock Classes="h3" Text="{x:Static localization:Resources.YourResults}"/>
         <TextBlock Classes="h3" Text="{Binding ResultsFormatted}"/>
         
-        <Button Command="{Binding GoBackToMenu}" HorizontalAlignment="Center">Вернуться в меню</Button>
+        <Button Command="{Binding Back}" 
+                Content="{x:Static localization:Resources.Back}" 
+                HorizontalAlignment="Center"/>
     </StackPanel>
 </UserControl>

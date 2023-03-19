@@ -4,5 +4,6 @@
     <Application.Styles>
         <FluentTheme Mode="Dark"/>
         <StyleInclude Source="/TextStyles.axaml" />
+        <StyleInclude Source="/Icons.axaml" />
     </Application.Styles>
 </Application>
