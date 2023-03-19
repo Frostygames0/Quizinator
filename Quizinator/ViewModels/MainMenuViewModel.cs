@@ -26,8 +26,8 @@ public class MainMenuViewModel : ViewModelBase, IRoutableViewModel, IActivatable
     
     public ObservableCollection<Models.Quiz> FoundQuizzes { get; }
     
-    public ReactiveCommand<Unit, bool> RefreshSearch { get; }
-    public ReactiveCommand<Unit, string?> OpenSearchFolder { get; }
+    public ReactiveCommand<Unit, Unit> RefreshSearch { get; }
+    public ReactiveCommand<Unit, Unit> OpenSearchFolder { get; }
 
     public ReactiveCommand<Unit, Unit> NewQuiz { get; }
     public ReactiveCommand<Unit, IRoutableViewModel> BeginQuiz { get; }
@@ -38,7 +38,7 @@ public class MainMenuViewModel : ViewModelBase, IRoutableViewModel, IActivatable
 
     public ViewModelActivator Activator { get; } = new();
     
-    public MainMenuViewModel(IScreen hostScreen, string? searchLocation = null,
+    public MainMenuViewModel(IScreen hostScreen, string searchFolder,
         IQuizSearcher? quizSearcher = null, IDialogDisplayer? dialogDisplayer = null, ISystemDialogDisplayer? systemDialogDisplayer = null)
     {
         HostScreen = hostScreen;
@@ -49,7 +49,7 @@ public class MainMenuViewModel : ViewModelBase, IRoutableViewModel, IActivatable
         _systemDialogDisplayer = systemDialogDisplayer ?? Locator.Current.GetImportantService<ISystemDialogDisplayer>();
 
         FoundQuizzes = new ObservableCollection<Models.Quiz>();
-        SearchFolder = searchLocation;
+        SearchFolder = searchFolder;
 
         var hostRouter = HostScreen.Router;
         NewQuiz = ReactiveCommand.CreateFromTask(async () =>
@@ -60,22 +60,30 @@ public class MainMenuViewModel : ViewModelBase, IRoutableViewModel, IActivatable
             () => hostRouter.NavigateAndReset.Execute(new QuizViewModel(hostScreen, SelectedQuiz))); // TODO make factory for this or service
         OpenSettings = ReactiveCommand.Create(() => {});
 
-        RefreshSearch = ReactiveCommand.CreateFromTask(() => RefreshFoundQuizzes(searchLocation));
-        OpenSearchFolder = ReactiveCommand.CreateFromTask(() => _systemDialogDisplayer.OpenFolder(searchLocation));
-        
+        RefreshSearch = ReactiveCommand.CreateFromTask(RefreshFoundQuizzes);
+        OpenSearchFolder = ReactiveCommand.CreateFromTask(OpenFolder);
+
         this.WhenActivated((CompositeDisposable disposables) => RefreshSearch.Execute());
     }
     
     // TODO I don't really like this, maybe quiz searcher should use rx to update search?
-    private async Task<bool> RefreshFoundQuizzes(string? searchLocation)
+    private async Task RefreshFoundQuizzes()
     {
-        bool updated = await _quizSearcher.TryUpdateSearch(searchLocation);
+        bool updated = await _quizSearcher.TrySearch(SearchFolder);
         if (!updated) 
-            return updated;
+            return;
             
         FoundQuizzes.Clear();
         FoundQuizzes.AddRange(_quizSearcher.FoundQuizzes);
+    }
 
-        return updated;
+    private async Task OpenFolder()
+    {
+        var folder = await _systemDialogDisplayer.OpenFolder(SearchFolder);
+        if (folder != null)
+        {
+            SearchFolder = folder;
+            RefreshSearch.Execute();
+        }
     }
 }

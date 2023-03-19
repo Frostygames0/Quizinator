@@ -11,6 +11,6 @@ public class MainWindowViewModel : ViewModelBase, IScreen, IActivatableViewModel
     public MainWindowViewModel()
     {
         this.WhenActivated((CompositeDisposable disposable) 
-            => Router.Navigate.Execute(new MainMenuViewModel(this)));
+            => Router.Navigate.Execute(new MainMenuViewModel(this, Directories.Quizzes)));
     }
 }

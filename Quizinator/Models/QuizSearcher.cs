@@ -18,7 +18,7 @@ public class QuizSearcher : IQuizSearcher
         _defaultSearchPath = defaultSearchPath;
     }
     
-    public async Task<bool> TryUpdateSearch(string? searchPath = null)
+    public async Task<bool> TrySearch(string? searchPath = null)
     {
         string concreteSearchPath = searchPath ?? _defaultSearchPath;
         
@@ -27,7 +27,7 @@ public class QuizSearcher : IQuizSearcher
         if (!Directory.Exists(concreteSearchPath))
             return false;
         
-        var foundFiles = Directory.EnumerateFiles(concreteSearchPath, "*.json");
+        var foundFiles = Directory.EnumerateFiles(concreteSearchPath, "*.json", SearchOption.AllDirectories);
         
         foreach(var file in foundFiles)
         {
@@ -39,9 +39,6 @@ public class QuizSearcher : IQuizSearcher
 
             quizzes.Add(result);
         }
-
-        if (quizzes.Count == 0)
-            return false;
 
         FoundQuizzes = quizzes;
         

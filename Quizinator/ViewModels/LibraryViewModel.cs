@@ -54,7 +54,7 @@ public class LibraryViewModel : ViewModelBase, IRoutableViewModel, IActivatableV
     // TODO I don't really like this, maybe quiz searcher should use rx to update search?
     private async Task<bool> RefreshFoundQuizzes(string? searchLocation)
     {
-        bool updated = await _quizSearcher.TryUpdateSearch(searchLocation);
+        bool updated = await _quizSearcher.TrySearch(searchLocation);
         if (!updated) 
             return updated;
             

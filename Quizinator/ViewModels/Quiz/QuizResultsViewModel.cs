@@ -21,6 +21,6 @@ public class QuizResultsViewModel : ViewModelBase, IRoutableViewModel, IActivata
         ResultsFormatted = $"{quiz.CalculateResults()}/{quiz.Questions.Count}"; // TODO IDK IF THIS CORRECT (BUT WORKS)
         
         Back = ReactiveCommand.CreateFromObservable(
-            () => hostScreen.Router.NavigateAndReset.Execute(new MainMenuViewModel(hostScreen)));
+            () => hostScreen.Router.NavigateAndReset.Execute(new MainMenuViewModel(hostScreen, Directories.Quizzes)));
     }
 }

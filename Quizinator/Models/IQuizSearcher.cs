@@ -7,5 +7,5 @@ public interface IQuizSearcher
 {
     IEnumerable<Quiz> FoundQuizzes { get; }
 
-    Task<bool> TryUpdateSearch(string? searchPath = null);
+    Task<bool> TrySearch(string? searchPath = null);
 }
