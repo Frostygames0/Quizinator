@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:rxui="http://reactiveui.net"
         xmlns:localization="clr-namespace:Quizinator.Resources"
-        mc:Ignorable="d" Width="800" Height="450"
+        mc:Ignorable="d" 
+        Width="800" Height="450"
+        MinWidth="400" MinHeight="200"
         x:Class="Quizinator.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
 
