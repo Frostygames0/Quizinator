@@ -40,10 +40,8 @@ public class QuizViewModel : ViewModelBase, IQuizViewModel
         Next = ReactiveCommand.CreateFromObservable(() =>
         {
             if (_questionViewModels.Count == 0)
-            {
                 return hostScreen.Router.NavigateAndReset.Execute(quizResultsFactory.Create(HostScreen, _quiz, _viewModelToReturn));
-            }
-            
+
             return Router.NavigateAndReset.Execute(_questionViewModels.Dequeue());
         });
         

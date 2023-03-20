@@ -35,8 +35,7 @@ public class MainMenuViewModel : ViewModelBase, IMainMenuViewModel
             this.WhenAnyValue(x => x.LibraryViewModel.SelectedQuiz)
                 .Select(quiz => quiz is not null);
         BeginQuiz = ReactiveCommand.CreateFromObservable(() => 
-            HostScreen.Router.NavigateAndReset.Execute(quizViewFactory.Create(hostScreen, LibraryViewModel.SelectedQuiz, this)
-            ), canBeginQuiz);
+            HostScreen.Router.NavigateAndReset.Execute(quizViewFactory.Create(hostScreen, LibraryViewModel.SelectedQuiz, this)), canBeginQuiz);
         OpenSettings = ReactiveCommand.Create(() => {});
     }
 
