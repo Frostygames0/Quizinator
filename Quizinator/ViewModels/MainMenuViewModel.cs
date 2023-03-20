@@ -1,3 +1,4 @@
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Quizinator.Models.Dialog;
@@ -29,7 +30,13 @@ public class MainMenuViewModel : ViewModelBase, IMainMenuViewModel
         _dialogService = dialogService;
         
         NewQuiz = ReactiveCommand.CreateFromTask(CreateNewQuiz);
-        BeginQuiz = ReactiveCommand.CreateFromObservable(() => HostScreen.Router.NavigateAndReset.Execute(quizViewFactory.Create(hostScreen, LibraryViewModel.SelectedQuiz, this)));
+        
+        var canBeginQuiz = 
+            this.WhenAnyValue(x => x.LibraryViewModel.SelectedQuiz)
+                .Select(quiz => quiz is not null);
+        BeginQuiz = ReactiveCommand.CreateFromObservable(() => 
+            HostScreen.Router.NavigateAndReset.Execute(quizViewFactory.Create(hostScreen, LibraryViewModel.SelectedQuiz, this)
+            ), canBeginQuiz);
         OpenSettings = ReactiveCommand.Create(() => {});
     }
 

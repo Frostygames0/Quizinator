@@ -5,7 +5,8 @@
              xmlns:localization="clr-namespace:Quizinator.Resources"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Quizinator.Views.Quiz.QuizIntroView">
-    <StackPanel Spacing="10">
+    <StackPanel Spacing="10"
+                Margin="20">
         <StackPanel.Styles>
             <Style Selector="TextBlock">
                 <Setter Property="HorizontalAlignment" Value="Center" />
