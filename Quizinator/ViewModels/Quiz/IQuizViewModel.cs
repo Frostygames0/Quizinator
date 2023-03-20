@@ -3,7 +3,7 @@ using ReactiveUI;
 
 namespace Quizinator.ViewModels.Quiz;
 
-public interface IQuizViewModel : IScreen, IRoutableViewModel, IActivatableViewModel
+public interface IQuizViewModel : IScreen, IRoutableViewModel
 {
     public ICommand Next { get; }
 }

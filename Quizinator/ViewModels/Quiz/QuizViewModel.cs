@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using System.Reactive.Disposables;
 using System.Windows.Input;
 using Quizinator.ViewModels.Quiz.Factory;
 using ReactiveUI;
 
 namespace Quizinator.ViewModels.Quiz;
 
-public class QuizViewModel : ViewModelBase, IQuizViewModel
+public class QuizViewModel : ViewModelBase, IQuizViewModel, IActivatableViewModel
 {
     private readonly Models.Quiz _quiz;
     private readonly Queue<IQuestionViewModel> _questionViewModels;
@@ -45,6 +46,7 @@ public class QuizViewModel : ViewModelBase, IQuizViewModel
             return Router.NavigateAndReset.Execute(_questionViewModels.Dequeue());
         });
         
-        Router.Navigate.Execute(quizIntroFactory.Create(this, _quiz));
+        this.WhenActivated((CompositeDisposable disposable) 
+            => Router.Navigate.Execute(quizIntroFactory.Create(this, _quiz)));
     }
 }

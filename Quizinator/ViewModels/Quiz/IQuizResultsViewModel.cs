@@ -3,7 +3,7 @@ using ReactiveUI;
 
 namespace Quizinator.ViewModels.Quiz;
 
-public interface IQuizResultsViewModel : IRoutableViewModel, IActivatableViewModel
+public interface IQuizResultsViewModel : IRoutableViewModel
 {
     string ResultsFormatted { get; }
     

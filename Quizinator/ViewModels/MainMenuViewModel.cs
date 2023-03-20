@@ -28,19 +28,24 @@ public class MainMenuViewModel : ViewModelBase, IMainMenuViewModel
 
         LibraryViewModel = libraryViewModel;
         _dialogService = dialogService;
-        
-        NewQuiz = ReactiveCommand.CreateFromTask(CreateNewQuiz);
-        
+
         var canBeginQuiz = 
             this.WhenAnyValue(x => x.LibraryViewModel.SelectedQuiz)
                 .Select(quiz => quiz is not null);
         BeginQuiz = ReactiveCommand.CreateFromObservable(() => 
             HostScreen.Router.NavigateAndReset.Execute(quizViewFactory.Create(hostScreen, LibraryViewModel.SelectedQuiz, this)), canBeginQuiz);
-        OpenSettings = ReactiveCommand.Create(() => {});
+        NewQuiz = ReactiveCommand.CreateFromTask(CreateNewQuiz);
+        OpenSettings = ReactiveCommand.CreateFromTask(OpenSettingsMenu);
     }
 
     private async Task CreateNewQuiz()
     {
         var result = await _dialogService.ShowDialogAsync<CreateQuizDialogViewModel, string>(new CreateQuizDialogViewModel());
+        // TODO Implement quiz creation
+    }
+
+    private async Task OpenSettingsMenu()
+    {
+        // TODO Implement settings behaviour
     }
 }

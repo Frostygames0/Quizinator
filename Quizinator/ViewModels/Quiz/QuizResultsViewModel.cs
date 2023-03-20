@@ -8,8 +8,7 @@ public class QuizResultsViewModel : ViewModelBase, IQuizResultsViewModel
     private IRoutableViewModel _viewModelToReturn;
     
     public string ResultsFormatted { get; }
-
-    public ViewModelActivator Activator { get; } = new();
+    
     public string? UrlPathSegment { get; }
     public IScreen HostScreen { get; }
     
