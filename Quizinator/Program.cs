@@ -11,7 +11,7 @@ class Program
     public static void Main(string[] args)
     {
         Directories.CreateAppDirectories();
-        Bootstrapper.Bootstrap(Locator.CurrentMutable);
+        Bootstrapper.Bootstrap(Locator.CurrentMutable, Locator.Current);
 
         BuildAvaloniaApp()
             .StartWithClassicDesktopLifetime(args);

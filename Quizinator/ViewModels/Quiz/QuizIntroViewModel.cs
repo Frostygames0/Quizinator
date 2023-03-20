@@ -2,7 +2,7 @@ using ReactiveUI;
 
 namespace Quizinator.ViewModels.Quiz;
 
-public class QuizIntroViewModel : ViewModelBase, IRoutableViewModel
+public class QuizIntroViewModel : ViewModelBase, IQuizIntroViewModel
 {
     private readonly Models.Quiz _quiz;
     

@@ -23,7 +23,7 @@ public class Quiz
         Name = name;
         Description = description;
         Author = author;
-
+        
         Questions = questions.AsReadOnly();
     }
 

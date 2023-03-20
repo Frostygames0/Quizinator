@@ -1,19 +1,17 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Avalonia.Controls;
-using Quizinator.Extensions;
 using Quizinator.Views.Providers;
-using Splat;
 
 namespace Quizinator.Models.Dialog;
 
-public class SystemDialogDisplayer : ISystemDialogDisplayer
+public class SystemDialogService : ISystemDialogService
 {
     private readonly IMainWindowProvider _provider;
     
-    public SystemDialogDisplayer(IMainWindowProvider? provider = null)
+    public SystemDialogService(IMainWindowProvider provider)
     {
-        _provider = provider ?? Locator.Current.GetImportantService<IMainWindowProvider>();
+        _provider = provider;
     }
 
     public async Task<string[]?> OpenFile(bool allowMultiple = false, FileDialogFilter? filter = null, string? defaultFileName = null)

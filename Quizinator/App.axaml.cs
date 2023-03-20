@@ -1,8 +1,10 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Quizinator.Extensions;
 using Quizinator.ViewModels;
 using Quizinator.Views;
+using Splat;
 
 namespace Quizinator;
 
@@ -19,7 +21,7 @@ public partial class App : Application
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel()
+                DataContext = Locator.Current.GetImportantService<IMainWindowViewModel>()
             };
         }
         

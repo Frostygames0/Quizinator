@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace Quizinator.Models;
 
-public class QuizSearcher : IQuizSearcher
+public class QuizSearcherService : IQuizSearcherService
 {
     private readonly string _defaultSearchPath;
     
     public IEnumerable<Quiz> FoundQuizzes { private set; get; }
 
-    public QuizSearcher(string defaultSearchPath)
+    public QuizSearcherService(string defaultSearchPath)
     {
         FoundQuizzes = new List<Quiz>();
 
@@ -32,7 +32,17 @@ public class QuizSearcher : IQuizSearcher
         foreach(var file in foundFiles)
         {
             await using var stream = File.OpenRead(file);
-            Quiz? result = await JsonSerializer.DeserializeAsync<Quiz>(stream);
+            Quiz? result;
+            try
+            {
+                result = await JsonSerializer.DeserializeAsync<Quiz>(stream);
+            }
+            catch (JsonException exception)
+            {
+                continue;
+            }
+            
+            await stream.DisposeAsync();
             
             if (result is null)
                 continue;

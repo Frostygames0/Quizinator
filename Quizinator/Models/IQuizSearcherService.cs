@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Quizinator.Models;
 
-public interface IQuizSearcher
+public interface IQuizSearcherService
 {
     IEnumerable<Quiz> FoundQuizzes { get; }
 

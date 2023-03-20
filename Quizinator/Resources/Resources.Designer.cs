@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Quizinator.Assets.Localization {
+namespace Quizinator.Resources {
     using System;
     
     
@@ -38,7 +38,7 @@ namespace Quizinator.Assets.Localization {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Quizinator.Assets.Localization.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Quizinator.Resources.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -87,7 +87,7 @@ namespace Quizinator.Assets.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Author&apos;s name....
+        ///   Looks up a localized string similar to Author&apos;s Name....
         /// </summary>
         public static string EnterAuthor {
             get {
@@ -96,7 +96,7 @@ namespace Quizinator.Assets.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter Description...
+        ///   Looks up a localized string similar to Enter Description....
         /// </summary>
         public static string EnterDescription {
             get {
@@ -146,6 +146,15 @@ namespace Quizinator.Assets.Localization {
         public static string LibrarySelectQuiz {
             get {
                 return ResourceManager.GetString("LibrarySelectQuiz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A little empty here....
+        /// </summary>
+        public static string LittleEmpty {
+            get {
+                return ResourceManager.GetString("LittleEmpty", resourceCulture);
             }
         }
         

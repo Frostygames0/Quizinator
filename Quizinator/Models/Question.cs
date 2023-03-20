@@ -6,7 +6,7 @@ namespace Quizinator.Models;
 
 public class Question
 {
-    private int _givenAnswer = 0;
+    private int _givenAnswer;
     private bool _wasAnsweredBefore;
 
     [JsonPropertyName("question")]

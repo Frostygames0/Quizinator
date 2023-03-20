@@ -3,7 +3,7 @@ using Avalonia.Controls;
 
 namespace Quizinator.Models.Dialog;
 
-public interface ISystemDialogDisplayer
+public interface ISystemDialogService
 {
     Task<string[]?> OpenFile(bool allowMultiple = false, FileDialogFilter? filter = null, string? defaultFileName = null);
     

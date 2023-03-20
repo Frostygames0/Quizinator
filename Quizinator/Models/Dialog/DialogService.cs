@@ -1,23 +1,21 @@
 using System;
 using System.Threading.Tasks;
-using Quizinator.Extensions;
 using Quizinator.ViewModels.Dialogs;
 using Quizinator.Views.Dialogs;
 using Quizinator.Views.Providers;
 using ReactiveUI;
-using Splat;
 
 namespace Quizinator.Models.Dialog;
 
-public class DialogDisplayer : IDialogDisplayer
+public class DialogService : IDialogService
 {
     private readonly IMainWindowProvider _provider;
     private readonly IViewLocator _viewLocator;
     
-    public DialogDisplayer(IMainWindowProvider? provider = null, IViewLocator? viewLocator = null)
+    public DialogService(IMainWindowProvider provider, IViewLocator viewLocator)
     {
-        _provider = provider ?? Locator.Current.GetImportantService<IMainWindowProvider>();
-        _viewLocator = viewLocator ?? ViewLocator.Current;
+        _provider = provider;
+        _viewLocator = viewLocator;
     }
     
     public Task<TResult> ShowDialogAsync<T, TResult>(T dialogViewModel) where T : DialogViewModelBase<TResult>

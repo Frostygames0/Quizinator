@@ -1,11 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <root>
-    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-        <xsd:element name="root" msdata:IsDataSet="true">
-            
-        </xsd:element>
-    </xsd:schema>
     <resheader name="resmimetype">
         <value>text/microsoft-resx</value>
     </resheader>
@@ -19,63 +12,66 @@
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
     <data name="AppName" xml:space="preserve">
-        <value>QuizinatoR</value>
+        <value>ВикторинатоР</value>
     </data>
     <data name="Back" xml:space="preserve">
-        <value>Back</value>
+        <value>Назад</value>
     </data>
     <data name="CreateNewQuiz" xml:space="preserve">
-        <value>Create New Quiz</value>
+        <value>Создать новую Викторину</value>
     </data>
     <data name="EnterAuthor" xml:space="preserve">
-        <value>Author's name...</value>
+        <value>Имя автора...</value>
     </data>
     <data name="EnterDescription" xml:space="preserve">
-        <value>Enter Description..</value>
+        <value>Введите описание...</value>
     </data>
     <data name="EnterName" xml:space="preserve">
-        <value>Enter Name...</value>
-    </data>
-    <data name="LibraryAuthor" xml:space="preserve">
-        <value>Author: {0}</value>
+        <value>Введите название...</value>
     </data>
     <data name="LibraryBeginQuiz" xml:space="preserve">
-        <value>Begin Quiz</value>
+        <value>Начать Викторину</value>
+    </data>
+    <data name="LibraryAuthor" xml:space="preserve">
+        <value>Автор: {0}</value>
     </data>
     <data name="LibraryDescription" xml:space="preserve">
-        <value>Description: {0}</value>
+        <value>Описание: {0}</value>
     </data>
     <data name="LibrarySelectQuiz" xml:space="preserve">
-        <value>Select a Quiz</value>
+        <value>Выберите Викторину</value>
+    </data>
+    <data name="LittleEmpty" xml:space="preserve">
+        <value>Немного пустовато...</value>
     </data>
     <data name="Loading" xml:space="preserve">
-        <value>Loading...</value>
+        <value>Загрузка...</value>
     </data>
     <data name="NewQuiz" xml:space="preserve">
-        <value>New Quiz</value>
+        <value>Новая Викторина</value>
     </data>
     <data name="Next" xml:space="preserve">
-        <value>Next</value>
+        <value>Далее</value>
     </data>
     <data name="OpenLibrary" xml:space="preserve">
-        <value>Open Library</value>
+        <value>Открыть Библиотеку</value>
     </data>
     <data name="QuizIntroAuthor" xml:space="preserve">
-        <value>Author - {0}</value>
+        <value>Автор - {0}</value>
     </data>
     <data name="QuizIntroQuestions" xml:space="preserve">
-        <value>Questions - 0/{0}</value>
+        <value>Вопросов - {0}</value>
     </data>
     <data name="Refresh" xml:space="preserve">
-        <value>Refresh</value>
+        <value>Обновить</value>
     </data>
     <data name="ReturnToMenu" xml:space="preserve">
-        <value>Return To Menu</value>
+        <value>Вернуться в Меню</value>
     </data>
     <data name="TestCompleted" xml:space="preserve">
-        <value>Test Completed!</value>
+        <value>Тест окончен!</value>
     </data>
     <data name="YourResults" xml:space="preserve">
-        <value>Your Results:</value>
+        <value>Ваши результаты!</value>
     </data>
 </root>

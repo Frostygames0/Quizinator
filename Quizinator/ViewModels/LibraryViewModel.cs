@@ -1,66 +1,61 @@
-﻿using System;
 using System.Collections.ObjectModel;
-using System.Reactive;
 using System.Reactive.Disposables;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using DynamicData;
-using Quizinator.Extensions;
 using Quizinator.Models;
-using Quizinator.ViewModels.Quiz;
+using Quizinator.Models.Dialog;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using Splat;
 
 namespace Quizinator.ViewModels;
 
-[Obsolete("Merged into MainMenuViewModel")]
-public class LibraryViewModel : ViewModelBase, IRoutableViewModel, IActivatableViewModel
+public class LibraryViewModel : ViewModelBase, ILibraryViewModel, IActivatableViewModel
 {
-    private readonly IQuizSearcher _quizSearcher;
+    private readonly IQuizSearcherService _quizSearcherService;
+    private readonly ISystemDialogService _systemDialogService;
     
-    [Reactive]
-    public Models.Quiz? SelectedQuiz { get; set; }
-
+    [Reactive] public string? SearchFolder { get; set; }
+    [Reactive] public Models.Quiz? SelectedQuiz { get; set; }
+    
     public ObservableCollection<Models.Quiz> FoundQuizzes { get; }
-
-    public ReactiveCommand<Unit, IRoutableViewModel> ReturnToMenu { get; }
-    public ReactiveCommand<Unit, bool> RefreshSearch { get; }
-    public ReactiveCommand<Unit, IRoutableViewModel> Start { get; }
-
-    public string? UrlPathSegment { get; }
-    public IScreen HostScreen { get; }
+    
+    public ICommand RefreshSearch { get; }
+    public ICommand OpenSearchFolder { get; }
 
     public ViewModelActivator Activator { get; } = new();
-    
-    public LibraryViewModel(IScreen hostScreen, string? searchLocation = null, IQuizSearcher? quizSearcher = null)
+
+    public LibraryViewModel(string defaultSearchFolder, IQuizSearcherService quizSearcherService, ISystemDialogService systemDialogService)
     {
-        HostScreen = hostScreen;
-        UrlPathSegment = "quiz_library";
+        _quizSearcherService = quizSearcherService;
+        _systemDialogService = systemDialogService;
 
         FoundQuizzes = new ObservableCollection<Models.Quiz>();
-        _quizSearcher = quizSearcher ?? Locator.Current.GetImportantService<IQuizSearcher>();
+        SearchFolder = defaultSearchFolder;
 
-        var hostRouter = HostScreen.Router;
-        ReturnToMenu = ReactiveCommand.CreateFromObservable(
-            () => hostRouter.NavigateAndReset.Execute(new MenuViewModel(hostScreen))); // TODO make factory for this or service
+        RefreshSearch = ReactiveCommand.CreateFromTask(RefreshFoundQuizzes);
+        OpenSearchFolder = ReactiveCommand.CreateFromTask(OpenFolder);
         
-        Start = ReactiveCommand.CreateFromObservable(
-            () => hostRouter.NavigateAndReset.Execute(new QuizViewModel(hostScreen, SelectedQuiz))); // TODO make factory for this or service
-
-        RefreshSearch = ReactiveCommand.CreateFromTask(() => RefreshFoundQuizzes(searchLocation));
-        this.WhenActivated((CompositeDisposable disposables) => RefreshSearch.Execute());
+        this.WhenActivated((CompositeDisposable disposable) => RefreshSearch.Execute(null));
     }
     
-    // TODO I don't really like this, maybe quiz searcher should use rx to update search?
-    private async Task<bool> RefreshFoundQuizzes(string? searchLocation)
+    private async Task RefreshFoundQuizzes()
     {
-        bool updated = await _quizSearcher.TrySearch(searchLocation);
+        bool updated = await _quizSearcherService.TrySearch(SearchFolder);
         if (!updated) 
-            return updated;
+            return;
             
         FoundQuizzes.Clear();
-        FoundQuizzes.AddRange(_quizSearcher.FoundQuizzes);
+        FoundQuizzes.AddRange(_quizSearcherService.FoundQuizzes);
+    }
 
-        return updated;
+    private async Task OpenFolder()
+    {
+        var folder = await _systemDialogService.OpenFolder(SearchFolder);
+        if (folder != null)
+        {
+            SearchFolder = folder;
+            RefreshSearch.Execute(null);
+        }
     }
 }

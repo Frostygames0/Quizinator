@@ -7,12 +7,11 @@ using ReactiveUI.Fody.Helpers;
 
 namespace Quizinator.ViewModels.Quiz;
 
-public class QuestionViewModel : ViewModelBase, IRoutableViewModel
+public class QuestionViewModel : ViewModelBase, IQuestionViewModel
 {
     private readonly Question _question;
 
-    [Reactive]
-    public int ChosenAnswerIndex { get; set; }
+    [Reactive] public int ChosenAnswerIndex { get; set; }
 
     public string Question => _question.LiteralQuestion;
     public IList<string> Answers => _question.Answers;

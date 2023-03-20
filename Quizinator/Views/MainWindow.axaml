@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:rxui="http://reactiveui.net"
-        xmlns:localization="clr-namespace:Quizinator.Assets.Localization"
+        xmlns:localization="clr-namespace:Quizinator.Resources"
         mc:Ignorable="d" Width="800" Height="450"
         x:Class="Quizinator.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"

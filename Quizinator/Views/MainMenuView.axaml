@@ -2,8 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:localization="clr-namespace:Quizinator.Assets.Localization"
-             xmlns:models="clr-namespace:Quizinator.Models"
+             xmlns:localization="clr-namespace:Quizinator.Resources"
+             xmlns:reactiveUi="http://reactiveui.net"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Quizinator.Views.MainMenuView">
     
@@ -27,10 +27,10 @@
         <TextBlock Classes="h3"
                    Grid.Row="1" Grid.Column="1"
                    Margin="5"
-                   Text="{Binding SelectedQuiz.Description}"
+                   Text="{Binding LibraryViewModel.SelectedQuiz.Description}"
                    TextWrapping="Wrap"/>
         
-        <ListBox Grid.Row="1" Grid.Column="0" 
+        <!--<ListBox Grid.Row="1" Grid.Column="0" 
                  Items="{Binding FoundQuizzes}"
                  SelectedItem="{Binding SelectedQuiz}"
                  SelectionMode="AlwaysSelected"
@@ -78,7 +78,10 @@
             <Button Grid.Column="1" Command="{Binding OpenSearchFolder}">
                 <PathIcon Data="{StaticResource  folder}" />
             </Button>
-        </Grid>
+        </Grid>-->
+        
+        <reactiveUi:ViewModelViewHost ViewModel="{Binding LibraryViewModel}" PageTransition="{x:Null}"
+            Grid.Column="0" Grid.Row="1" Grid.RowSpan="2"/>
         
         <Grid Grid.Row="2" Grid.Column="1" 
               ColumnDefinitions="*, *, *"
@@ -88,7 +91,7 @@
                 <PathIcon Data="{StaticResource  add_square_regular}" />
             </Button>
 
-            <Button Grid.Column="1" IsEnabled="{Binding SelectedQuiz, Converter={x:Static ObjectConverters.IsNotNull}}" Command="{Binding BeginQuiz}">
+            <Button Grid.Column="1" IsEnabled="{Binding LibraryViewModel.SelectedQuiz, Converter={x:Static ObjectConverters.IsNotNull}}" Command="{Binding BeginQuiz}">
                 <PathIcon Data="{StaticResource  play}" />
             </Button>
 

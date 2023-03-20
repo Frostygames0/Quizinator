@@ -1,54 +1,60 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:Quizinator.Models"
-             xmlns:localization="clr-namespace:Quizinator.Assets.Localization"
+             xmlns:models="clr-namespace:Quizinator.Models"
+             xmlns:localization="clr-namespace:Quizinator.Resources"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Quizinator.Views.LibraryView">
-    <UserControl.DataTemplates>
-        <DataTemplate DataType="{x:Type local:Quiz}">
-            <StackPanel HorizontalAlignment="Stretch">
-                <TextBlock Text="{Binding Name}"
-                           TextWrapping="Wrap"
-                           FontSize="25"
-                           FontWeight="Thin" />
-                <TextBlock Text="{Binding Description, StringFormat='{x:Static localization:Resources.LibraryDescription}'}"
-                           TextWrapping="Wrap"
-                           FontWeight="Thin" />
-                <TextBlock Text="{Binding Author, StringFormat='{x:Static localization:Resources.LibraryAuthor}'}"
-                           TextWrapping="Wrap"
-                           FontSize="10"
-                           FontWeight="Thin" />
-            </StackPanel>
-        </DataTemplate>
-    </UserControl.DataTemplates>
-
-    <StackPanel Spacing="10"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch">
-        <TextBlock Classes="h2"
-                   HorizontalAlignment="Center"
-                   Text="{x:Static localization:Resources.LibrarySelectQuiz}" />
-
-        <ListBox Items="{Binding FoundQuizzes}"
+    <Grid RowDefinitions="7*,55">
+        <ListBox Grid.Row="0" 
+                 Items="{Binding FoundQuizzes}"
                  SelectedItem="{Binding SelectedQuiz}"
                  SelectionMode="AlwaysSelected"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible">
+                 ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 Margin="5">
+            <ListBox.DataTemplates>
+                <DataTemplate DataType="{x:Type models:Quiz}">
+                    <StackPanel HorizontalAlignment="Stretch">
+                        <TextBlock Text="{Binding Name}"
+                                   TextWrapping="Wrap"
+                                   FontSize="25"
+                                   FontWeight="Thin" />
+                        <TextBlock Text="{Binding Author, StringFormat='{x:Static localization:Resources.LibraryAuthor}'}"
+                                   TextWrapping="Wrap"
+                                   FontWeight="Thin" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.DataTemplates>
+            
             <ListBox.Styles>
                 <Style Selector="ListBoxItem">
                     <Setter Property="HorizontalAlignment" Value="Stretch" />
                 </Style>
             </ListBox.Styles>
         </ListBox>
-        <WrapPanel HorizontalAlignment="Center">
-            <Button Command="{Binding Start}"
-                    Content="{x:Static localization:Resources.LibraryBeginQuiz}"
-                    IsEnabled="{Binding SelectedQuiz, Converter={x:Static ObjectConverters.IsNotNull}}"/>
-            <Button Command="{Binding ReturnToMenu}"
-                    Content="{x:Static localization:Resources.ReturnToMenu}" />
-            <Button Command="{Binding RefreshSearch}"
-                    Content="{x:Static localization:Resources.Refresh}" />
-        </WrapPanel>
-    </StackPanel>
+        
+        <TextBlock Classes="h2"
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="{x:Static localization:Resources.LittleEmpty}"
+            Foreground="Gray"
+            IsVisible="{Binding !FoundQuizzes.Count}"/>
+        
+        <Grid Grid.Row="1"
+              ColumnDefinitions="*, *, 0.1*, 10*"
+              Margin="5">
+            <TextBox Grid.Column="3"
+                     Text="{Binding SearchFolder}"
+                     IsEnabled="False"/>
+            <Button Grid.Column="0" Command="{Binding RefreshSearch}">
+                <PathIcon Data="{StaticResource  refresh}" />
+            </Button>
+
+            <Button Grid.Column="1" Command="{Binding OpenSearchFolder}">
+                <PathIcon Data="{StaticResource  folder}" />
+            </Button>
+        </Grid>
+    </Grid>
 </UserControl>

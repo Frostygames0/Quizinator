@@ -19,19 +19,6 @@
     <ItemGroup>
         <Folder Include="Models\" />
         <AvaloniaResource Include="Assets\**" />
-        <AvaloniaResource Include="Assets\Localization\Resources.resx">
-          <Generator>PublicResXFileCodeGenerator</Generator>
-          <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-        </AvaloniaResource>
-        <EmbeddedResource Remove="Assets\Localization\Resources.resx" />
-        <AvaloniaResource Include="Assets\Localization\Resources.resx">
-          <Generator>PublicResXFileCodeGenerator</Generator>
-          <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-        </AvaloniaResource>
-        <EmbeddedResource Update="Assets\Localization\Resources2.resx">
-          <Generator>PublicResXFileCodeGenerator</Generator>
-          <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
@@ -51,22 +38,25 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Views\LibraryView.axaml.cs">
-        <DependentUpon>QuizLibraryView.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
       <Compile Update="Views\CreateQuizWindow.axaml.cs">
         <DependentUpon>CreateQuizWindow.axaml</DependentUpon>
         <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Assets\Localization\Resources.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Resources.resx</DependentUpon>
       </Compile>
       <Compile Update="Views\MainMenuView.axaml.cs">
         <DependentUpon>MainMenuView.axaml</DependentUpon>
         <SubType>Code</SubType>
       </Compile>
+      <Compile Update="Resources\Resources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.resx</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\Resources.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
     </ItemGroup>
 </Project>
