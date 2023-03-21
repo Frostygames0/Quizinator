@@ -1,7 +1,7 @@
 using System.Windows.Input;
 using ReactiveUI;
 
-namespace Quizinator.ViewModels.Quiz;
+namespace Quizinator.ViewModels.Quizzes;
 
 public interface IQuizResultsViewModel : IRoutableViewModel
 {

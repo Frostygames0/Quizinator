@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Reactive.Linq;
-using Quizinator.Models;
+using Quizinator.Models.Quizzes;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-namespace Quizinator.ViewModels.Quiz;
+namespace Quizinator.ViewModels.Quizzes;
 
 public class QuestionViewModel : ViewModelBase, IQuestionViewModel
 {

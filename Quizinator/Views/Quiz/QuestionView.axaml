@@ -4,25 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Quizinator.Views.Quiz.QuestionView">
-    <StackPanel Spacing="15"
-                Margin="20">
-        <StackPanel.Styles>
-            <Style Selector="TextBlock">
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-            </Style>
-            <Style Selector="Button">
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-            </Style>
-        </StackPanel.Styles>
+    <UserControl.Styles>
+        <Style Selector="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Styles>
+    
+    <StackPanel Margin="20"
+                Spacing="10">
+        <Viewbox HorizontalAlignment="Stretch"
+                 VerticalAlignment="Center">
+            <TextBlock Classes="h2" Text="{Binding Question}" />
+        </Viewbox>
         
-        <TextBlock Classes="h2" Text="{Binding Question}" />
-        <ListBox Items="{Binding Answers}"
-                 SelectedIndex="{Binding ChosenAnswerIndex}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding }" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            <ListBox Items="{Binding Answers}"
+                     SelectedIndex="{Binding ChosenAnswerIndex}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding }" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
     </StackPanel>
 </UserControl>

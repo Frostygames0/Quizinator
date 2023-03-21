@@ -1,5 +1,5 @@
-using Quizinator.Models.Dialog;
-using Quizinator.ViewModels.Quiz.Factory;
+using Quizinator.Models.Services.Dialogs;
+using Quizinator.ViewModels.Quizzes.Factory;
 using ReactiveUI;
 
 namespace Quizinator.ViewModels.Factory;

@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Avalonia.Controls;
 
-namespace Quizinator.Models.Dialog;
+namespace Quizinator.Models.Services.Dialogs;
 
 public interface ISystemDialogService
 {

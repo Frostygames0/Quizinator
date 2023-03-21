@@ -1,6 +1,6 @@
 using ReactiveUI;
 
-namespace Quizinator.ViewModels.Quiz;
+namespace Quizinator.ViewModels.Quizzes;
 
 public interface IQuizIntroViewModel : IRoutableViewModel
 {

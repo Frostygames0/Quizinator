@@ -1,10 +1,10 @@
 using System.Reflection;
 using Quizinator.Extensions;
-using Quizinator.Models;
-using Quizinator.Models.Dialog;
+using Quizinator.Models.Services.Dialogs;
+using Quizinator.Models.Services.Quizzes;
 using Quizinator.ViewModels;
 using Quizinator.ViewModels.Factory;
-using Quizinator.ViewModels.Quiz.Factory;
+using Quizinator.ViewModels.Quizzes.Factory;
 using Quizinator.Views.Providers;
 using ReactiveUI;
 using Splat;
@@ -15,8 +15,8 @@ public static class Bootstrapper
 {
     public static void Bootstrap(IMutableDependencyResolver mutable, IReadonlyDependencyResolver immutable)
     {
-        RegisterViews(mutable);
         RegisterServices(mutable, immutable);
+        RegisterViews(mutable);
         RegisterViewModels(mutable, immutable);
     }
 

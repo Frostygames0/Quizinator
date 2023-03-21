@@ -1,30 +1,31 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace Quizinator.Models;
+namespace Quizinator.Models.Quizzes;
 
 public class Quiz
 {
     [JsonPropertyName("name")]
-    public string Name { get; }
+    public required string Name { get; init; }
     [JsonPropertyName("description")]
-    public string Description { get; }
-    [JsonPropertyName("author")]
-    public string Author { get; }
+    public required string Description { get; init; }
+    [JsonPropertyName("author"), JsonRequired]
+    public required string Author { get; init; }
     
     [JsonPropertyName("questions")]
-    public IList<Question> Questions { get; }
+    public required IList<Question> Questions { get; init; }
     
-    [JsonConstructor]
+    [JsonConstructor, SetsRequiredMembers]
     public Quiz(string name, string description, string author, IList<Question> questions)
     {
         Name = name;
         Description = description;
         Author = author;
         
-        Questions = questions.AsReadOnly();
+        Questions = questions?.AsReadOnly();
     }
 
     public int CalculateResults()

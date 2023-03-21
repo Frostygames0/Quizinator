@@ -28,7 +28,8 @@
                    Grid.Row="1" Grid.Column="1"
                    Margin="5"
                    Text="{Binding LibraryViewModel.SelectedQuiz.Description}"
-                   TextWrapping="Wrap"/>
+                   TextWrapping="Wrap"
+                   IsVisible="{Binding LibraryViewModel.SelectedQuiz.Description, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"/>
         
         <!--<ListBox Grid.Row="1" Grid.Column="0" 
                  Items="{Binding FoundQuizzes}"

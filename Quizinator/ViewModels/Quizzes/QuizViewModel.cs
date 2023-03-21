@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using System.Reactive.Disposables;
 using System.Windows.Input;
-using Quizinator.ViewModels.Quiz.Factory;
+using Quizinator.Models.Quizzes;
+using Quizinator.ViewModels.Quizzes.Factory;
 using ReactiveUI;
 
-namespace Quizinator.ViewModels.Quiz;
+namespace Quizinator.ViewModels.Quizzes;
 
 public class QuizViewModel : ViewModelBase, IQuizViewModel, IActivatableViewModel
 {
-    private readonly Models.Quiz _quiz;
+    private readonly Quiz _quiz;
     private readonly Queue<IQuestionViewModel> _questionViewModels;
 
     private readonly IRoutableViewModel _viewModelToReturn;
@@ -21,7 +22,7 @@ public class QuizViewModel : ViewModelBase, IQuizViewModel, IActivatableViewMode
     public string? UrlPathSegment { get; }
     public IScreen HostScreen { get; }
     
-    public QuizViewModel(IScreen hostScreen, Models.Quiz quiz, IRoutableViewModel viewModelToReturn, 
+    public QuizViewModel(IScreen hostScreen, Quiz quiz, IRoutableViewModel viewModelToReturn, 
         IQuizIntroViewModelFactory quizIntroFactory, IQuizResultsViewModelFactory quizResultsFactory,
         IQuestionViewModelFactory questionFactory)
     {

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Quizinator.Views.Providers;
 
-namespace Quizinator.Models.Dialog;
+namespace Quizinator.Models.Services.Dialogs;
 
 public class SystemDialogService : ISystemDialogService
 {

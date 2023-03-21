@@ -1,5 +1,5 @@
 using Avalonia.ReactiveUI;
-using Quizinator.ViewModels.Quiz;
+using Quizinator.ViewModels.Quizzes;
 
 namespace Quizinator.Views.Quiz;
 

@@ -3,8 +3,9 @@ using System.Reactive.Disposables;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using DynamicData;
-using Quizinator.Models;
-using Quizinator.Models.Dialog;
+using Quizinator.Models.Quizzes;
+using Quizinator.Models.Services.Dialogs;
+using Quizinator.Models.Services.Quizzes;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
@@ -16,9 +17,9 @@ public class LibraryViewModel : ViewModelBase, ILibraryViewModel, IActivatableVi
     private readonly ISystemDialogService _systemDialogService;
     
     [Reactive] public string? SearchFolder { get; set; }
-    [Reactive] public Models.Quiz? SelectedQuiz { get; set; }
+    [Reactive] public Quiz? SelectedQuiz { get; set; }
     
-    public ObservableCollection<Models.Quiz> FoundQuizzes { get; }
+    public ObservableCollection<Quiz> FoundQuizzes { get; }
     
     public ICommand RefreshSearch { get; }
     public ICommand OpenSearchFolder { get; }
@@ -30,7 +31,7 @@ public class LibraryViewModel : ViewModelBase, ILibraryViewModel, IActivatableVi
         _quizSearcherService = quizSearcherService;
         _systemDialogService = systemDialogService;
 
-        FoundQuizzes = new ObservableCollection<Models.Quiz>();
+        FoundQuizzes = new ObservableCollection<Quiz>();
         SearchFolder = defaultSearchFolder;
 
         RefreshSearch = ReactiveCommand.CreateFromTask(RefreshFoundQuizzes);

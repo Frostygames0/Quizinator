@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Quizinator.Models;
+using Quizinator.Models.Quizzes;
 
 namespace QuizinatorTest;
 

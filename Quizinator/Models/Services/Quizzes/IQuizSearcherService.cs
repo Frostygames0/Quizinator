@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Quizinator.Models.Quizzes;
 
-namespace Quizinator.Models;
+namespace Quizinator.Models.Services.Quizzes;
 
 public interface IQuizSearcherService
 {

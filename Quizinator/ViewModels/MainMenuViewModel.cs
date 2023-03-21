@@ -1,9 +1,9 @@
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Quizinator.Models.Dialog;
+using Quizinator.Models.Services.Dialogs;
 using Quizinator.ViewModels.Dialogs;
-using Quizinator.ViewModels.Quiz.Factory;
+using Quizinator.ViewModels.Quizzes.Factory;
 using ReactiveUI;
 
 namespace Quizinator.ViewModels;

@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Quizinator.Models.Quizzes;
 
-namespace Quizinator.Models;
+namespace Quizinator.Models.Services.Quizzes;
 
 public class QuizSearcherService : IQuizSearcherService
 {
@@ -31,18 +32,7 @@ public class QuizSearcherService : IQuizSearcherService
         
         foreach(var file in foundFiles)
         {
-            await using var stream = File.OpenRead(file);
-            Quiz? result;
-            try
-            {
-                result = await JsonSerializer.DeserializeAsync<Quiz>(stream);
-            }
-            catch (JsonException exception)
-            {
-                continue;
-            }
-            
-            await stream.DisposeAsync();
+            var result = await DeserializeQuiz(file);
             
             if (result is null)
                 continue;
@@ -53,5 +43,24 @@ public class QuizSearcherService : IQuizSearcherService
         FoundQuizzes = quizzes;
         
         return true;
+    }
+
+    private async Task<Quiz?> DeserializeQuiz(string file)
+    {
+        await using var stream = File.OpenRead(file);
+
+        Quiz? quiz;
+        try
+        {
+            quiz = await JsonSerializer.DeserializeAsync<Quiz>(stream);
+        }
+        catch (JsonException e)
+        {
+            return null;
+        }
+            
+        await stream.DisposeAsync();
+
+        return quiz;
     }
 }

@@ -13,6 +13,12 @@ public abstract class DialogViewModelBase<TResult> : ViewModelBase
     }
 }
 
+public abstract class DialogViewModelBase : DialogViewModelBase<object>
+{
+    protected void Close()
+        => Close(null);
+}
+
 public class DialogResultEventArgs<TResult> : EventArgs
 {
     public TResult Result { get; }

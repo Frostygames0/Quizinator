@@ -1,6 +1,7 @@
+using Quizinator.Models.Quizzes;
 using ReactiveUI;
 
-namespace Quizinator.ViewModels.Quiz.Factory;
+namespace Quizinator.ViewModels.Quizzes.Factory;
 
 public class QuizViewModelFactory : IQuizViewModelFactory
 {
@@ -16,7 +17,7 @@ public class QuizViewModelFactory : IQuizViewModelFactory
         _questionFactory = questionFactory;
     }
     
-    public IQuizViewModel Create(IScreen hostScreen, Models.Quiz quiz, IRoutableViewModel viewModelToReturn)
+    public IQuizViewModel Create(IScreen hostScreen, Quiz quiz, IRoutableViewModel viewModelToReturn)
     {
         return new QuizViewModel(hostScreen, quiz, viewModelToReturn, _quizIntroFactory, _quizResultsFactory, _questionFactory);
     }

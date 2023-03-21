@@ -1,7 +1,8 @@
 using System.Windows.Input;
+using Quizinator.Models.Quizzes;
 using ReactiveUI;
 
-namespace Quizinator.ViewModels.Quiz;
+namespace Quizinator.ViewModels.Quizzes;
 
 public class QuizResultsViewModel : ViewModelBase, IQuizResultsViewModel
 {
@@ -14,7 +15,7 @@ public class QuizResultsViewModel : ViewModelBase, IQuizResultsViewModel
     
     public ICommand Back { get; }
     
-    public QuizResultsViewModel(IScreen hostScreen, Models.Quiz quiz, IRoutableViewModel viewModelToReturn)
+    public QuizResultsViewModel(IScreen hostScreen, Quiz quiz, IRoutableViewModel viewModelToReturn)
     {
         HostScreen = hostScreen;
         UrlPathSegment = "quiz_results";

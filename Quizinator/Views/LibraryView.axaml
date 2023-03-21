@@ -2,8 +2,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:models="clr-namespace:Quizinator.Models"
              xmlns:localization="clr-namespace:Quizinator.Resources"
+             xmlns:quizzes="clr-namespace:Quizinator.Models.Quizzes"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Quizinator.Views.LibraryView">
     <Grid RowDefinitions="7*,55">
@@ -14,7 +14,7 @@
                  ScrollViewer.VerticalScrollBarVisibility="Visible"
                  Margin="5">
             <ListBox.DataTemplates>
-                <DataTemplate DataType="{x:Type models:Quiz}">
+                <DataTemplate DataType="{x:Type quizzes:Quiz}">
                     <StackPanel HorizontalAlignment="Stretch">
                         <TextBlock Text="{Binding Name}"
                                    TextWrapping="Wrap"

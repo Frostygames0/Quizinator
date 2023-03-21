@@ -1,10 +1,11 @@
+using Quizinator.Models.Quizzes;
 using ReactiveUI;
 
-namespace Quizinator.ViewModels.Quiz;
+namespace Quizinator.ViewModels.Quizzes;
 
 public class QuizIntroViewModel : ViewModelBase, IQuizIntroViewModel
 {
-    private readonly Models.Quiz _quiz;
+    private readonly Quiz _quiz;
     
     public string Name => _quiz.Name;
     public string Description => _quiz.Description;
@@ -15,7 +16,7 @@ public class QuizIntroViewModel : ViewModelBase, IQuizIntroViewModel
     public string? UrlPathSegment { get; }
     public IScreen HostScreen { get; }
 
-    public QuizIntroViewModel(IScreen hostScreen, Models.Quiz quiz)
+    public QuizIntroViewModel(IScreen hostScreen, Quiz quiz)
     {
         HostScreen = hostScreen;
         UrlPathSegment = "quiz_intro";
