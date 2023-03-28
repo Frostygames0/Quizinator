@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:localization="clr-namespace:Quizinator.Resources"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Quizinator.Views.Quiz.QuizIntroView">
+             x:Class="Quizinator.Views.Dialogs.Quiz.QuizResultsView">
     <StackPanel Spacing="10"
                 Margin="20">
         <StackPanel.Styles>
@@ -12,14 +12,9 @@
                 <Setter Property="HorizontalAlignment" Value="Center" />
             </Style>
         </StackPanel.Styles>
-
-        <TextBlock Classes="h2"
-                   Text="{Binding Name}" />
-        <TextBlock Classes="h3"
-                   Text="{Binding Description}" />
-        <TextBlock Classes="h3"
-                   Text="{Binding Author, StringFormat='{x:Static localization:Resources.QuizIntroAuthor}'}" />
-        <TextBlock Classes="ultraSmall"
-                   Text="{Binding QuestionCount, StringFormat='{x:Static localization:Resources.QuizIntroQuestions}'}" />
+        
+        <TextBlock Classes="h2" Text="{x:Static localization:Resources.TestCompleted}"/>
+        <TextBlock Classes="h3" Text="{x:Static localization:Resources.YourResults}"/>
+        <TextBlock Classes="h3" Text="{Binding ResultsFormatted}"/>
     </StackPanel>
 </UserControl>

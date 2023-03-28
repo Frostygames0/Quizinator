@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using Avalonia.ReactiveUI;
+using Avalonia.Controls;
 using Quizinator.ViewModels.Dialogs;
 using Quizinator.Views.Providers;
 using ReactiveUI;
@@ -18,18 +18,17 @@ public class DialogService : IDialogService
         _viewLocator = viewLocator;
     }
     
-    public async Task<TResult> ShowDialogAsync<T, TResult>(T dialogViewModel) where T : DialogViewModelBase<TResult>
+    public async Task<TResult> ShowDialogAsync<TResult>(DialogViewModelBase<TResult> dialogViewModel)
     {
-        if (_viewLocator.ResolveView(dialogViewModel) is not ReactiveWindow<T> view)
+        if (_viewLocator.ResolveView(dialogViewModel) is not Window window)
             throw new InvalidOperationException("View for view model is not a window!");
 
-        view.ViewModel = dialogViewModel;
+        window.DataContext = dialogViewModel;
         
         var mainWindow = _provider.ProvideMainWindow();
-        return await view.ShowDialog<TResult>(mainWindow);
+        return await window.ShowDialog<TResult>(mainWindow);
     }
     
-    // Overload for dialogs that return nothing
-    public async Task ShowDialogAsync<T>(T dialogViewModel) where T : DialogViewModelBase
-        => await ShowDialogAsync<T, object>(dialogViewModel);
+    public async Task ShowDialogAsync(DialogViewModelBase dialogViewModel)
+        => await ShowDialogAsync<object>(dialogViewModel);
 }

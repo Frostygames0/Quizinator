@@ -9,7 +9,7 @@ public interface ILibraryViewModel
     string? SearchFolder { get; set; }
     Quiz? SelectedQuiz { get; set; }
     
-    ObservableCollection<Quiz> FoundQuizzes { get; }
+    ReadOnlyObservableCollection<Quiz> FoundQuizzes { get; }
     
     ICommand RefreshSearch { get; }
     ICommand OpenSearchFolder { get; }

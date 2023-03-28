@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using DynamicData;
 using Quizinator.Models.Quizzes;
 
 namespace Quizinator.Models.Services.Quizzes;
@@ -9,24 +11,25 @@ namespace Quizinator.Models.Services.Quizzes;
 public class QuizSearcherService : IQuizSearcherService
 {
     private readonly string _defaultSearchPath;
-    
-    public IEnumerable<Quiz> FoundQuizzes { private set; get; }
+    private readonly ISourceList<Quiz> _foundQuizzes;
 
     public QuizSearcherService(string defaultSearchPath)
     {
-        FoundQuizzes = new List<Quiz>();
-
         _defaultSearchPath = defaultSearchPath;
+        _foundQuizzes = new SourceList<Quiz>();
     }
-    
-    public async Task<bool> TrySearch(string? searchPath = null)
+
+    public IObservable<IChangeSet<Quiz>> Connect()
+        => _foundQuizzes.Connect();
+
+    public async Task RefreshSearchAsync(string? searchPath = null)
     {
         string concreteSearchPath = searchPath ?? _defaultSearchPath;
         
         var quizzes = new List<Quiz>();
 
         if (!Directory.Exists(concreteSearchPath))
-            return false;
+            return;
         
         var foundFiles = Directory.EnumerateFiles(concreteSearchPath, "*.json", SearchOption.AllDirectories);
         
@@ -39,13 +42,15 @@ public class QuizSearcherService : IQuizSearcherService
 
             quizzes.Add(result);
         }
-
-        FoundQuizzes = quizzes;
         
-        return true;
+        _foundQuizzes.Edit(list =>
+        {
+            list.Clear();
+            list.AddRange(quizzes);
+        });
     }
 
-    private async Task<Quiz?> DeserializeQuiz(string file)
+    private static async Task<Quiz?> DeserializeQuiz(string file)
     {
         await using var stream = File.OpenRead(file);
 
@@ -54,11 +59,11 @@ public class QuizSearcherService : IQuizSearcherService
         {
             quiz = await JsonSerializer.DeserializeAsync<Quiz>(stream);
         }
-        catch (JsonException e)
+        catch
         {
             return null;
         }
-            
+
         await stream.DisposeAsync();
 
         return quiz;

@@ -1,11 +1,8 @@
-using System.Windows.Input;
 using ReactiveUI;
 
-namespace Quizinator.ViewModels.Quizzes;
+namespace Quizinator.ViewModels.Dialogs.Quizzes;
 
 public interface IQuizResultsViewModel : IRoutableViewModel
 {
     string ResultsFormatted { get; }
-    
-    public ICommand Back { get; }
 }

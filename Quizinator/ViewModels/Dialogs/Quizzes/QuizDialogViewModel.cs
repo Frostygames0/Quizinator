@@ -2,37 +2,30 @@ using System.Collections.Generic;
 using System.Reactive.Disposables;
 using System.Windows.Input;
 using Quizinator.Models.Quizzes;
-using Quizinator.ViewModels.Quizzes.Factory;
+using Quizinator.ViewModels.Dialogs.Quizzes.Factory;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 
-namespace Quizinator.ViewModels.Quizzes;
+namespace Quizinator.ViewModels.Dialogs.Quizzes;
 
-public class QuizViewModel : ViewModelBase, IQuizViewModel, IActivatableViewModel
+public class QuizDialogViewModel : DialogViewModelBase, IQuizDialogViewModel, IActivatableViewModel
 {
     private readonly Quiz _quiz;
     private readonly Queue<IQuestionViewModel> _questionViewModels;
 
-    private readonly IRoutableViewModel _viewModelToReturn;
-
+    [Reactive] public bool ReachedEnd { get; set; }
+    
     public ICommand Next { get; }
 
     public ViewModelActivator Activator { get; } = new();
     public RoutingState Router { get; } = new();
-    
-    public string? UrlPathSegment { get; }
-    public IScreen HostScreen { get; }
-    
-    public QuizViewModel(IScreen hostScreen, Quiz quiz, IRoutableViewModel viewModelToReturn, 
-        IQuizIntroViewModelFactory quizIntroFactory, IQuizResultsViewModelFactory quizResultsFactory,
+
+    public QuizDialogViewModel(Quiz quiz, 
+        IQuizIntroViewModelFactory quizIntroFactory, 
+        IQuizResultsViewModelFactory quizResultsFactory,
         IQuestionViewModelFactory questionFactory)
     {
         _quiz = quiz;
-        
-        HostScreen = hostScreen;
-        UrlPathSegment = "quiz";
-
-        _viewModelToReturn = viewModelToReturn;
-
         _questionViewModels = new Queue<IQuestionViewModel>();
         foreach (var question in _quiz.Questions)
         {
@@ -42,11 +35,11 @@ public class QuizViewModel : ViewModelBase, IQuizViewModel, IActivatableViewMode
         Next = ReactiveCommand.CreateFromObservable(() =>
         {
             if (_questionViewModels.Count == 0)
-                return hostScreen.Router.NavigateAndReset.Execute(quizResultsFactory.Create(HostScreen, _quiz, _viewModelToReturn));
+                return Router.NavigateAndReset.Execute(quizResultsFactory.Create(this, _quiz));
 
             return Router.NavigateAndReset.Execute(_questionViewModels.Dequeue());
         });
-        
+
         this.WhenActivated((CompositeDisposable disposable) 
             => Router.Navigate.Execute(quizIntroFactory.Create(this, _quiz)));
     }

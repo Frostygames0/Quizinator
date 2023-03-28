@@ -1,15 +1,19 @@
 using System;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 
 namespace Quizinator.ViewModels.Dialogs;
 
 public abstract class DialogViewModelBase<TResult> : ViewModelBase
 {
-    public event EventHandler<DialogResultEventArgs<TResult>> RequestedClosing;
-    
+    private readonly ISubject<TResult> _requestedClosing = new Subject<TResult>();
+
+    public IObservable<TResult> RequestedClosing => _requestedClosing.AsObservable();
+
     protected void Close(TResult result)
     {
-        var args = new DialogResultEventArgs<TResult>(result);
-        RequestedClosing?.Invoke(this, args);
+        _requestedClosing.OnNext(result);
+        _requestedClosing.OnCompleted();
     }
 }
 
@@ -17,12 +21,4 @@ public abstract class DialogViewModelBase : DialogViewModelBase<object>
 {
     protected void Close()
         => Close(null);
-}
-
-public class DialogResultEventArgs<TResult> : EventArgs
-{
-    public TResult Result { get; }
-
-    public DialogResultEventArgs(TResult result)
-        => Result = result;
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
 namespace Quizinator.Models.Quizzes;
@@ -10,14 +9,14 @@ public class Question
     private int _givenAnswer;
     private bool _wasAnsweredBefore;
 
-    [JsonPropertyName("question")]
-    public required string LiteralQuestion { get; init; }
-    [JsonPropertyName("answers")]
-    public required IList<string> Answers { get; init; }
-    [JsonPropertyName("correctAnswerIndex")]
-    public required int CorrectAnswerIndex { get; init; }
+    [JsonPropertyName("question"), JsonRequired]
+    public string LiteralQuestion { get; init; }
+    [JsonPropertyName("answers"), JsonRequired]
+    public IList<string> Answers { get; init; }
+    [JsonPropertyName("correctAnswerIndex"), JsonRequired]
+    public int CorrectAnswerIndex { get; init; }
     
-    [JsonConstructor, SetsRequiredMembers]
+    [JsonConstructor]
     public Question(string literalQuestion, IList<string> answers, int correctAnswerIndex)
     {
         LiteralQuestion = literalQuestion;

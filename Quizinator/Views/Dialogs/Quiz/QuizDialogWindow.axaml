@@ -1,29 +1,20 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:Quizinator.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:rxui="http://reactiveui.net"
         xmlns:localization="clr-namespace:Quizinator.Resources"
-        mc:Ignorable="d" 
+        mc:Ignorable="d"
         Width="800" Height="450"
-        MinWidth="400" MinHeight="200"
-        x:Class="Quizinator.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
+        MinWidth="400" MinHeight="200" CanResize="False"
+        x:Class="Quizinator.Views.Dialogs.Quiz.QuizDialogWindow"
 
         Icon="/Assets/Images/quizinator_logo.ico"
-        Title="{x:Static localization:Resources.AppName}"
+        Title="Test lol"
 
         TransparencyLevelHint="AcrylicBlur"
         Background="Transparent"
         ExtendClientAreaToDecorationsHint="True">
-
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel />
-    </Design.DataContext>
-
     <Panel>
         <ExperimentalAcrylicBorder IsHitTestVisible="False">
             <ExperimentalAcrylicBorder.Material>
@@ -35,7 +26,24 @@
             </ExperimentalAcrylicBorder.Material>
         </ExperimentalAcrylicBorder>
         
-        <rxui:ViewModelViewHost ViewModel="{Binding MainMenuViewModel}"/>
+        <StackPanel Spacing="15">
+            <StackPanel.Styles>
+                <Style Selector="Button">
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                </Style>
+            </StackPanel.Styles>
+        
+            <rxui:RoutedViewHost Router="{Binding Router}"
+                                 PageTransition="{x:Null}">
+                <rxui:RoutedViewHost.DefaultContent>
+                    <TextBlock Classes="h2"
+                               Text="{x:Static localization:Resources.Loading}" />
+                </rxui:RoutedViewHost.DefaultContent>
+            </rxui:RoutedViewHost>
+        
+            <Button Command="{Binding Next}"
+                    Content="{x:Static localization:Resources.Next}"
+                    IsVisible="{Binding Questions.Count}"/>
+        </StackPanel>
     </Panel>
-
 </Window>

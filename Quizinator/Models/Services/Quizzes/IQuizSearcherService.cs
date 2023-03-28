@@ -1,12 +1,13 @@
-using System.Collections.Generic;
+using System;
 using System.Threading.Tasks;
+using DynamicData;
 using Quizinator.Models.Quizzes;
 
 namespace Quizinator.Models.Services.Quizzes;
 
 public interface IQuizSearcherService
 {
-    IEnumerable<Quiz> FoundQuizzes { get; }
+    Task RefreshSearchAsync(string? searchPath = null);
 
-    Task<bool> TrySearch(string? searchPath = null);
+    IObservable<IChangeSet<Quiz>> Connect();
 }

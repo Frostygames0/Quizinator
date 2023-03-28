@@ -1,5 +1,7 @@
+using System;
 using System.Collections.ObjectModel;
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using DynamicData;
@@ -16,10 +18,12 @@ public class LibraryViewModel : ViewModelBase, ILibraryViewModel, IActivatableVi
     private readonly IQuizSearcherService _quizSearcherService;
     private readonly ISystemDialogService _systemDialogService;
     
+    private readonly ReadOnlyObservableCollection<Quiz> _foundQuizzes;
+    
     [Reactive] public string? SearchFolder { get; set; }
     [Reactive] public Quiz? SelectedQuiz { get; set; }
     
-    public ObservableCollection<Quiz> FoundQuizzes { get; }
+    public ReadOnlyObservableCollection<Quiz> FoundQuizzes => _foundQuizzes;
     
     public ICommand RefreshSearch { get; }
     public ICommand OpenSearchFolder { get; }
@@ -30,26 +34,20 @@ public class LibraryViewModel : ViewModelBase, ILibraryViewModel, IActivatableVi
     {
         _quizSearcherService = quizSearcherService;
         _systemDialogService = systemDialogService;
-
-        FoundQuizzes = new ObservableCollection<Quiz>();
+        
         SearchFolder = defaultSearchFolder;
 
-        RefreshSearch = ReactiveCommand.CreateFromTask(RefreshFoundQuizzes);
+        _quizSearcherService.Connect()
+            .ObserveOn(RxApp.MainThreadScheduler)
+            .Bind(out _foundQuizzes)
+            .Subscribe();
+
+        RefreshSearch = ReactiveCommand.CreateFromTask(() => _quizSearcherService.RefreshSearchAsync(SearchFolder));
         OpenSearchFolder = ReactiveCommand.CreateFromTask(OpenFolder);
         
         this.WhenActivated((CompositeDisposable disposable) => RefreshSearch.Execute(null));
     }
     
-    private async Task RefreshFoundQuizzes()
-    {
-        bool updated = await _quizSearcherService.TrySearch(SearchFolder);
-        if (!updated) 
-            return;
-            
-        FoundQuizzes.Clear();
-        FoundQuizzes.AddRange(_quizSearcherService.FoundQuizzes);
-    }
-
     private async Task OpenFolder()
     {
         var folder = await _systemDialogService.OpenFolder(SearchFolder);

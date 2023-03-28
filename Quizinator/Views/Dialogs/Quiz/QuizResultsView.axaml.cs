@@ -1,7 +1,7 @@
 using Avalonia.ReactiveUI;
-using Quizinator.ViewModels.Quizzes;
+using Quizinator.ViewModels.Dialogs.Quizzes;
 
-namespace Quizinator.Views.Quiz;
+namespace Quizinator.Views.Dialogs.Quiz;
 
 public partial class QuizResultsView : ReactiveUserControl<QuizResultsViewModel>
 {

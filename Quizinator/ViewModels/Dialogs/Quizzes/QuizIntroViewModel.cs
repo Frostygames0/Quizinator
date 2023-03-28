@@ -1,7 +1,7 @@
 using Quizinator.Models.Quizzes;
 using ReactiveUI;
 
-namespace Quizinator.ViewModels.Quizzes;
+namespace Quizinator.ViewModels.Dialogs.Quizzes;
 
 public class QuizIntroViewModel : ViewModelBase, IQuizIntroViewModel
 {

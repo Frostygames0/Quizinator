@@ -3,8 +3,7 @@ using Quizinator.Extensions;
 using Quizinator.Models.Services.Dialogs;
 using Quizinator.Models.Services.Quizzes;
 using Quizinator.ViewModels;
-using Quizinator.ViewModels.Factory;
-using Quizinator.ViewModels.Quizzes.Factory;
+using Quizinator.ViewModels.Dialogs.Quizzes.Factory;
 using Quizinator.Views.Providers;
 using ReactiveUI;
 using Splat;
@@ -38,14 +37,14 @@ public static class Bootstrapper
                 immutable.GetImportantService<ISystemDialogService>()),
             typeof(ILibraryViewModel));
 
-        mutable.RegisterLazySingleton(() => new MainMenuViewModelFactory(
+        mutable.RegisterLazySingleton(() => new MainMenuViewModel(
                 immutable.GetImportantService<ILibraryViewModel>(),
                 immutable.GetImportantService<IDialogService>(),
                 immutable.GetImportantService<IQuizViewModelFactory>()),
-            typeof(IMainMenuViewModelFactory));
+            typeof(IMainMenuViewModel));
 
         mutable.RegisterLazySingleton(() => new MainWindowViewModel(
-                immutable.GetImportantService<IMainMenuViewModelFactory>()),
+                immutable.GetImportantService<IMainMenuViewModel>()),
             typeof(IMainWindowViewModel));
     }
 

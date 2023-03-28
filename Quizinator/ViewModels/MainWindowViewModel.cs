@@ -1,21 +1,11 @@
-﻿using System.Reactive.Disposables;
-using Quizinator.ViewModels.Factory;
-using ReactiveUI;
-
-namespace Quizinator.ViewModels;
+﻿namespace Quizinator.ViewModels;
 
 public class MainWindowViewModel : ViewModelBase, IMainWindowViewModel
 {
-    private readonly IMainMenuViewModel _mainMenuViewModel;
-    
-    public ViewModelActivator Activator { get; } = new();
-    public RoutingState Router { get; } = new();
+    private IMainMenuViewModel MainMenuViewModel { get; }
 
-    public MainWindowViewModel(IMainMenuViewModelFactory mainMenuViewModelFactory)
+    public MainWindowViewModel(IMainMenuViewModel mainMenuViewModel)
     {
-        _mainMenuViewModel = mainMenuViewModelFactory.Create(this);
-        
-        this.WhenActivated((CompositeDisposable disposable) 
-            => Router.Navigate.Execute(_mainMenuViewModel));
+        MainMenuViewModel = mainMenuViewModel;
     }
 }

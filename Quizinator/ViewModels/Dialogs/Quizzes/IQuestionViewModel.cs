@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using ReactiveUI;
 
-namespace Quizinator.ViewModels.Quizzes;
+namespace Quizinator.ViewModels.Dialogs.Quizzes;
 
 public interface IQuestionViewModel : IRoutableViewModel
 {

@@ -1,4 +1,4 @@
-using System.Reactive.Disposables;
+using System;
 using Avalonia.ReactiveUI;
 using Quizinator.ViewModels.Dialogs;
 using ReactiveUI;
@@ -10,15 +10,14 @@ public abstract class DialogWindowBase<T, TResult> : ReactiveWindow<T> where T :
     protected DialogWindowBase()
     {
         this.WhenActivated(disposables =>
-        {
-            ViewModel!.RequestedClosing += OnViewModelRequestedClosing;
-
-            Disposable.Create(() => ViewModel!.RequestedClosing -= OnViewModelRequestedClosing)
-                .DisposeWith(disposables);
-        });
+            disposables(ViewModel!.RequestedClosing.Subscribe(OnViewModelRequestedClosing)));
     }
-    
-    private void OnViewModelRequestedClosing(object? sender, DialogResultEventArgs<TResult> eventArgs) 
-        => Close(eventArgs.Result);
+
+    private void OnViewModelRequestedClosing(TResult result) 
+        => Close(result);
+}
+
+public abstract class DialogWindowBase<T> : DialogWindowBase<T, object> where T : DialogViewModelBase
+{
     
 }

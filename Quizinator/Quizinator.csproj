@@ -59,4 +59,18 @@
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Views\Quiz\QuestionView.axaml" />
+      <UpToDateCheckInput Remove="Views\Quiz\QuizDialogWindow.axaml" />
+      <UpToDateCheckInput Remove="Views\Quiz\QuizIntroView.axaml" />
+      <UpToDateCheckInput Remove="Views\Quiz\QuizResultsView.axaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="Views\Dialogs\Quiz\QuestionView.axaml" />
+      <AdditionalFiles Include="Views\Dialogs\Quiz\QuizDialogWindow.axaml" />
+      <AdditionalFiles Include="Views\Dialogs\Quiz\QuizIntroView.axaml" />
+      <AdditionalFiles Include="Views\Dialogs\Quiz\QuizResultsView.axaml" />
+    </ItemGroup>
 </Project>

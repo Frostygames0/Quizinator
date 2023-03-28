@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -8,24 +8,26 @@ namespace Quizinator.Models.Quizzes;
 
 public class Quiz
 {
-    [JsonPropertyName("name")]
-    public required string Name { get; init; }
-    [JsonPropertyName("description")]
-    public required string Description { get; init; }
+    [JsonPropertyName("name"), JsonRequired]
+    public string Name { get; init; }
+    [JsonPropertyName("description"), JsonRequired]
+    public string Description { get; init; }
     [JsonPropertyName("author"), JsonRequired]
-    public required string Author { get; init; }
+    public string Author { get; init; }
     
-    [JsonPropertyName("questions")]
-    public required IList<Question> Questions { get; init; }
+    [JsonPropertyName("questions"), JsonRequired]
+    public IList<Question> Questions { get; init; }
     
-    [JsonConstructor, SetsRequiredMembers]
+    [JsonConstructor]
     public Quiz(string name, string description, string author, IList<Question> questions)
     {
         Name = name;
         Description = description;
         Author = author;
-        
-        Questions = questions?.AsReadOnly();
+
+        if (questions is null)
+            throw new ArgumentNullException(nameof(questions),"Supposedly, JSON deserializer decided to wrongly serialize questions!");
+        Questions = questions.AsReadOnly();
     }
 
     public int CalculateResults()

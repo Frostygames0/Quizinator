@@ -1,9 +1,8 @@
 using System.Windows.Input;
-using ReactiveUI;
 
 namespace Quizinator.ViewModels;
 
-public interface IMainMenuViewModel : IRoutableViewModel
+public interface IMainMenuViewModel
 {
     ILibraryViewModel LibraryViewModel { get; }
     

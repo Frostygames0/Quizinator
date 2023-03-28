@@ -5,7 +5,7 @@ namespace Quizinator.Models.Services.Dialogs;
 
 public interface IDialogService
 {
-    Task<TResult> ShowDialogAsync<T, TResult>(T viewModel) where T : DialogViewModelBase<TResult>;
+    Task<TResult> ShowDialogAsync<TResult>(DialogViewModelBase<TResult> viewModel);
     
-    Task ShowDialogAsync<T>(T viewModel) where T : DialogViewModelBase;
+    Task ShowDialogAsync(DialogViewModelBase viewModel);
 }
